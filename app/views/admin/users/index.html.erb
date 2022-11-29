@@ -3,6 +3,7 @@
   <thead>
   <tr>
   <th>id</th>
+    <th>Avatar</th>
   <th>username</th>
   <th>email</th>
   <th>role</th>
@@ -11,6 +12,7 @@
   <% @users.each do |user| %>
     <tr>
       <td><%= user.id %></td>
+      <td><%= image_tag user.image.url if user.image.present? %></td>
       <td><%= user.username %></td>
       <td><%= user.email %></td>
       <td><%= user.role %></td>

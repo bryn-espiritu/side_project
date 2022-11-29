@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # get 'home/index'
+  root "home#index"
   # get 'home/new'
   devise_for :users, controllers: {
     sessions: 'users/sessions'
@@ -18,5 +18,10 @@ Rails.application.routes.draw do
     resources :home
   # end
 
+<<<<<<< HEAD
 >>>>>>> 5e9c05c ([Feature 1] generate model  and added reference from user to home relation included)
+=======
+
+
+>>>>>>> eb6e00e ([Feature 1] added root to home/index)
 end

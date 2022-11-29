@@ -32,6 +32,10 @@ gem "jbuilder"
 
 gem 'devise'
 
+gem "font-awesome-sass", "~> 6.2.1"
+
+gem 'phonelib'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

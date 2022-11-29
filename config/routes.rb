@@ -8,10 +8,13 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  namespace :admin do
-    resources :users
+  constraints(AdminDomainConstraint.new) do
+    namespace :admin do
+      resources :users
+    end
   end
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
   # constraints(ClientDomainConstraint.new) do
@@ -24,4 +27,7 @@ Rails.application.routes.draw do
 
 
 >>>>>>> eb6e00e ([Feature 1] added root to home/index)
+=======
+
+>>>>>>> 4f9f907 ([Feature 2] adding domain config | adding constraint)
 end

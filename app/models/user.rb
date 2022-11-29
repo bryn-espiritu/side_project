@@ -5,5 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
 
   enum role: { client: 0, admin: 1 }
+  has_many :homes
 
 end

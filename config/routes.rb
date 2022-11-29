@@ -1,19 +1,18 @@
 Rails.application.routes.draw do
-  root "home#index"
   # get 'home/new'
-  devise_for :users, controllers: {
-    sessions: 'users/sessions'
-  }
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
   # Defines the root path route ("/")
   constraints(AdminDomainConstraint.new) do
-    namespace :admin do
+
+    namespace :admin, path: '' do
+      root "users#index"
+      devise_for :users, controllers: { sessions: 'admins/sessions' }
       resources :users
     end
   end
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -30,4 +29,10 @@ Rails.application.routes.draw do
 =======
 
 >>>>>>> 4f9f907 ([Feature 2] adding domain config | adding constraint)
+=======
+  constraints(ClientDomainConstraint.new) do
+    devise_for :users, controllers: { sessions: 'users/sessions' }
+    resources :home, path: ''
+  end
+>>>>>>> b03ebef ([Feature 2] update routes and fix constraint)
 end

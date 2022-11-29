@@ -10,6 +10,7 @@
   </head>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -51,6 +52,25 @@
 >>>>>>> 0a58c40 ([Feature 3] added link and script for bootrap)
 =======
 >>>>>>> acad338 ([Feature 3] add style to body for footer)
+=======
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#"><i class="fa-regular fa-sun"></i></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <%= link_to "Home", home_index_path, class: "nav-item nav-link active" %>
+            <%= link_to "Sign in", new_user_session_path, class: "nav-link", style: "background: none; border: none; color: green" unless user_signed_in? %>
+            <%= link_to "Profile", edit_user_registration_path, class: "nav-link", style: "background: none; border: none; color: blue" if user_signed_in? %>
+            <%= button_to 'Sign-Out', destroy_user_session_path, class: "nav-link", style: "background: none; border: none; color: red", method: :delete if user_signed_in? %>
+          <a class="nav-item nav-link disabled" href="#"><%= "Hello #{current_user.email}" if current_user %></a>
+        </div>
+      </div>
+    </nav>
+  </header>
+>>>>>>> 29d1478 ([Feature 4] User can edit)
 
 
   <body style="min-height: 100vh; display: flex; flex-direction: column;">

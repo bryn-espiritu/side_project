@@ -1,0 +1,17 @@
+<%= render 'layouts/client_navbar' %>
+<div class="mt-3 container form-control w-50">
+
+
+  <p class="d-flex justify-content-center"><%= image_tag @user.image.url if @user.image? %></p>
+  <p>Username: <span><%= @user.username %></span></p>
+  <p>Email Address: <span><%= @user.email %></span></p>
+  <p>Coins: <span><%= @user.coins %></span></p>
+
+  <button class="btn btn-outline-success">Cash in Now</button>
+  <div class="d-inline me-3">
+    <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-outline-success" %>
+    <button class="btn btn-outline-success">Address</button>
+  </div>
+</div>
+
+<%= render 'layouts/client_footer' %>

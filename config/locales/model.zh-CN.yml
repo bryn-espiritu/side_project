@@ -1,0 +1,10 @@
+zh-CN:
+  models:
+    post:
+      one: 文章
+      other: 多篇文章
+  activerecord:
+    attributes:
+      post:
+        title: 標題
+        content: 內容

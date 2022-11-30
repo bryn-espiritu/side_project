@@ -1,0 +1,3 @@
+zh-CN:
+  hello: "您好, %{name}"
+  post_list: 管理員列表

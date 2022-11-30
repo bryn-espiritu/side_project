@@ -1,13 +1,12 @@
 # frozen_string_literal: true
-
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    super
+  end
 
   # POST /resource
   # def create
@@ -16,13 +15,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def edit
-    super
+    @user = current_user
+    # super
   end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    # super
+     if @user.update(user_params)
+          redirect_to home_path
+        else
+          render :edit
+
+        end
+  end
 
   # DELETE /resource
   # def destroy
@@ -37,6 +43,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def cancel
   #   super
   # end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:username, :phone, :image )
+  end
+
 
   # protected
 

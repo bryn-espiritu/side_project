@@ -7,10 +7,12 @@
   <p>Email Address: <span><%= @user.email %></span></p>
   <p>Coins: <span><%= @user.coins %></span></p>
 
-  <button class="btn btn-outline-success">Cash in Now</button>
-  <div class="d-inline me-3">
-    <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-outline-success" %>
-    <button class="btn btn-outline-success">Address</button>
+  <button class="btn btn-outline-success w-100">Cash in Now</button>
+  <div>
+    <ul class="list-group list-group-horizontal-lg" style="list-style: none">
+      <li class="w-50"><%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-outline-success w-75" %></li>
+     <li style="margin-left: 100px; "><button class="btn btn-outline-success w-75">Address</button></li>
+    </ul>
   </div>
 </div>
 

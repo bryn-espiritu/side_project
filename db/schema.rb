@@ -10,12 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_29_094015) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_01_090115) do
+  create_table "barangays", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.bigint "city_municipality_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_municipality_id"], name: "index_barangays_on_city_municipality_id"
+  end
+
+  create_table "city_municipalities", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.bigint "province_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["province_id"], name: "index_city_municipalities_on_province_id"
+  end
+
   create_table "homes", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_homes_on_user_id"
+  end
+
+  create_table "provinces", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.bigint "region_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["region_id"], name: "index_provinces_on_region_id"
+  end
+
+  create_table "regions", charset: "utf8mb4", force: :cascade do |t|
+    t.string "region_name"
+    t.string "name"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|

@@ -1,10 +1,7 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<%= render "layouts/client_navbar" %>
 
-<<<<<<< HEAD
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-=======
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
 <%= form_for(resource, as: resource_name, url: user_registration_path, data: {turbo: false}, html: { method: :put }) do |f| %>
->>>>>>> d2492ad ([Feature 3] adding details to erb files)
   <%= render "users/shared/error_messages", resource: resource %>
 
   <div class="field">
@@ -60,3 +57,5 @@
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>
+
+<%= render 'layouts/client_footer' %>

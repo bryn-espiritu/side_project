@@ -1,0 +1,2 @@
+module Api::BarangaysHelper
+end

@@ -37,6 +37,8 @@ gem 'phonelib'
 gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
 
 gem 'rest-client'
+
+gem 'active_model_serializers', '~> 0.10.0'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

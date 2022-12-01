@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 =======
   constraints(ClientDomainConstraint.new) do
     devise_for :users, controllers: { sessions: 'users/sessions' }
+    root "home#index"
     resources :home
     resource :user_profile
   end

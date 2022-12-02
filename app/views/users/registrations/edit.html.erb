@@ -1,57 +1,60 @@
 <%= render "layouts/client_navbar" %>
 
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
-<%= form_for(resource, as: resource_name, url: user_registration_path, data: { turbo: false }, method: :put ) do |f| %>
+<h4><%= "Email Account: #{current_user.email}" %></h4>
+<%= form_for(resource, as: resource_name, url: user_registration_path, data: { turbo: false }, method: :put) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :image %><br/>
-    <%= f.file_field :image, autocomplete: "image" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :username %><br/>
-    <%= f.text_field :username, autocomplete: "username" %>
-  </div>
-
-<!--    <div class="field">-->
-<!--      <%#= f.label :email %><br />-->
-  <%#= f.email_field :email, autofocus: true, autocomplete: "email" %>
-<!--    </div>-->
-
-  <div class="field">
-    <%= f.label :phone %><br/>
-    <%= f.phone_field :phone, autocomplete: "phone" %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br/>
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br/>
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br/>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br/>
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
+  <div class="container form-control">
+    <div class="row">
+      <div class="col field">
+        <%= f.label :image %><br/>
+        <%= image_tag @user.image.url, style: "height: 50px; width: 50px" if @user.image? %>
+        <br>
+        <%= f.file_field :image, autocomplete: "image", class: "form-control" %>
+      </div>
+      <div class="col">
+        <div class="field">
+          <%= f.label :username %><br/>
+          <%= f.text_field :username, autocomplete: "username", class: "form-control" %>
+        </div>
+        <div class="field">
+          <%= f.label :phone %><br/>
+          <%= f.phone_field :phone, autocomplete: "phone", class: "form-control" %>
+        </div>
+      </div>
+      <div class="accordion" id="accordionExample">
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+        <div class="accordion-item my-5  bg-light">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Want to Change Password?
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="row my-4">
+              <div class="col mx-3">
+                <%= f.password_field :password, autocomplete: "new-password", placeholder: "New Password (minimum of 6 character)", class: "form-control" %>
+                <% if @minimum_password_length %>
+                <% end %>
+              </div>
+              <div class="col mx-3 ">
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm Password", class: "form-control" %>
+              </div>
+              <div class="d-flex justify-content-center mt-4">
+                <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control text-center w-75", placeholder: "Confirm Password" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="actions text-center">
+        <%= f.submit "Update", class: "btn btn-success w-75" %>
+      </div>
+    </div>
 <% end %>
-
+</div>
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>

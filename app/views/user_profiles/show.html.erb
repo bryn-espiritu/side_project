@@ -2,7 +2,7 @@
 <div class="mt-3 container form-control w-50">
 
 
-  <p class="d-flex justify-content-center"><%= image_tag @user.image.url if @user.image? %></p>
+  <p class="d-flex justify-content-center"><%= image_tag @user.image.url, style: "height: 100px; width: 100px" if @user.image? %></p>
   <p>Username: <span><%= @user.username %></span></p>
   <p>Email Address: <span><%= @user.email %></span></p>
   <p>Coins: <span><%= @user.coins %></span></p>
@@ -11,7 +11,7 @@
   <div class="">
     <ul class="nav nav-pills nav-justified mt-3 mb-3 hstack gap-3" style="list-style: none">
       <li class="nav-item"><%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-outline-success w-100" %></li>
-     <li class="nav-item"><%= link_to "Address", new_address_path, class: "btn btn-outline-success w-100" %></li>
+     <li class="nav-item"><%= link_to "Address", addresses_path, class: "btn btn-outline-success w-100" %></li>
     </ul>
   </div>
 </div>

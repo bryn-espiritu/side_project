@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     root "home#index"
     resources :home
     resource :user_profile
-    resource :address
+    resources :addresses
   end
 
   namespace :api do

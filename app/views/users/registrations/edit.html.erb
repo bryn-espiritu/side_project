@@ -1,26 +1,26 @@
 <%= render "layouts/client_navbar" %>
 
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
-<%= form_for(resource, as: resource_name, url: user_registration_path, data: {turbo: false}, html: { method: :put }) do |f| %>
+<%= form_for(resource, as: resource_name, url: user_registration_path, data: { turbo: false }, method: :put ) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :image %><br />
+    <%= f.label :image %><br/>
     <%= f.file_field :image, autocomplete: "image" %>
   </div>
 
   <div class="field">
-    <%= f.label :username %><br />
+    <%= f.label :username %><br/>
     <%= f.text_field :username, autocomplete: "username" %>
   </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<!--    <div class="field">-->
+<!--      <%#= f.label :email %><br />-->
+  <%#= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<!--    </div>-->
 
   <div class="field">
-    <%= f.label :phone %><br />
+    <%= f.label :phone %><br/>
     <%= f.phone_field :phone, autocomplete: "phone" %>
   </div>
 
@@ -29,21 +29,21 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br/>
     <%= f.password_field :password, autocomplete: "new-password" %>
     <% if @minimum_password_length %>
-      <br />
+      <br/>
       <em><%= @minimum_password_length %> characters minimum</em>
     <% end %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation %><br/>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br/>
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 

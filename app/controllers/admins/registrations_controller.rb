@@ -60,3 +60,4 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 end
+

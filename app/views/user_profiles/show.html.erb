@@ -8,10 +8,10 @@
   <p>Coins: <span><%= @user.coins %></span></p>
 
   <button class="btn btn-outline-success w-100">Cash in Now</button>
-  <div>
-    <ul class="list-group list-group-horizontal-lg" style="list-style: none">
-      <li class="w-50"><%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-outline-success w-75" %></li>
-     <li style="margin-left: 100px; "><button class="btn btn-outline-success w-75">Address</button></li>
+  <div class="">
+    <ul class="nav nav-pills nav-justified mt-3 mb-3 hstack gap-3" style="list-style: none">
+      <li class="nav-item"><%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-outline-success w-100" %></li>
+     <li class="nav-item"><%= link_to "Address", new_address_path, class: "btn btn-outline-success w-100" %></li>
     </ul>
   </div>
 </div>

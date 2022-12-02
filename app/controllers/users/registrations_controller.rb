@@ -4,9 +4,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    super
+  end
 
   # POST /resource
   # def create
@@ -20,13 +20,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
-    super
-    #  if @user.update(user_params)
-    #       redirect_to home_path
-    #     else
-    #       render :edit
-    #
-    #     end
+    #super
+    parameter = params[:user]
+    if parameter[:current_password].present? || parameter[:password_confirmation].present? || parameter[:password].present?
+      update_profile_with_pass
+    else
+      update_profile
+    end
   end
 
   # DELETE /resource
@@ -43,14 +43,32 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  private
+  protected
 
-  def user_params
-    params.require(:user).permit(:username, :phone, :image )
+  def with_password
+    params.require(:user).permit(:username, :phone, :image, :current_password, :password_confirmation, :password)
   end
 
+  def without_password
+    params.require(:user).permit(:username, :phone, :image)
+  end
 
-  # protected
+  def update_profile
+    if params[:user][:current_password].blank?
+      resource.update_without_password(without_password.except(:current_password))
+      redirect_to user_profile_path
+    else
+      render :edit
+    end
+  end
+
+  def update_profile_with_pass
+    if resource.update_with_password(with_password)
+      redirect_to new_user_session_path
+    else
+      render :edit
+    end
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params

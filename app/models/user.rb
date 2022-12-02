@@ -7,5 +7,6 @@ class User < ApplicationRecord
   mount_uploader :image, ImageUploader
   enum role: { client: 0, admin: 1 }
   has_many :homes
+  has_many :addresses
 
 end

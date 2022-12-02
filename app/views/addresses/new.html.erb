@@ -1,0 +1,7 @@
+<%= render 'layouts/client_navbar' %>
+<h1 class="text-center my-0">CREATE NEW ADDRESS</h1>
+<h5 class="text-center" style="color: #aba8a8"><%= "account: #{current_user.email}" %></h5>
+
+<%= render "form", address: @address %>
+
+<%= render "layouts/client_footer" %>

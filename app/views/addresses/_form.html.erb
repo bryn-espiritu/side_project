@@ -1,0 +1,55 @@
+<div>
+  <% if @address.errors.any? %>
+  <% @address.errors.each do |error| %>
+        <h3 style="color: #c11111"><%= error.full_message %> </h3>
+  <% end %>
+  <% end %>
+</div>
+
+<%= form_with model: @address, data: { controller: :location } do |f| %>
+  <div class="container w-50">
+    <div class="form-control bg-light">
+      <div class="row">
+        <h4 class="text-center">Please Enter the Following</h4>
+        <div class="col">
+          <label for="name" class="my-3">Name</label>
+          <%= f.text_field :name, class: "form-control", placeholder: "e.g Juan Delacruz" %>
+          <label for="phone" class="my-3">Phone Number</label>
+          <%= f.text_field :phone_number, class: "form-control", placeholder: "+63**********" %>
+          <%= link_to "Cancel", :back, class: "w-50 btn btn-dark mx-5", style: "margin-top: 158px;" %>
+        </div>
+
+        <div class="col">
+          <div class="mt-5">
+          <%= f.text_area :street_address, class: "form-control", id: "exampleFormControlInput1", style: "height: 50px", placeholder: "House/Unit/Flr #, Bldg Name, Blk or Lot #" %>
+          </div>
+          <div class="my-2">
+            <div class="my-2">
+              <%= f.collection_select :region_id,
+                                      Region.all, :id, :name,
+                                      { prompt: 'SELECT REGION' },
+                                      data: { location_target: 'selectedRegionId', action: 'change->location#fetchProvinces' }, class: "form-control" %>
+            </div>
+            <div class="my-2">
+              <%= f.collection_select :province_id, [], nil, nil,
+                                      { prompt: ' SELECT PROVINCE' },
+                                      data: { location_target: 'selectProvinceId', action: 'change->location#fetchCityMunicipalities' },
+                                      class: "form-control" %>
+            </div>
+            <div class="my-2">
+              <%= f.collection_select :city_municipality_id, [], nil, nil,
+                                      { prompt: 'SELECT CITY' },
+                                      data: { location_target: 'selectCityMunicipalityId', action: 'change->location#fetchBarangays' }, class: "form-control" %>
+            </div>
+            <div class="my-2">
+              <%= f.collection_select :barangay_id, [], nil, nil,
+                                      { prompt: 'SELECT BARANGAY' },
+                                      data: { location_target: 'selectBarangayId' }, class: "form-control" %>
+            </div>
+            <div class="text-center pt-3 mt-5"><%= f.submit class: "btn btn-success w-50" %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>
+</div>

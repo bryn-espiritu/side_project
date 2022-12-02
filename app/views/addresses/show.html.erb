@@ -1,0 +1,22 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Phone Number</th>
+    <th>Address</th>
+    <th>PostCode</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+<tbody>
+<tr>
+  <td><%= @address.name %></td>
+  <td><%= @address.phone_number %></td>
+  <td><%= @address.street_address %></td>
+  <td><%= "#{@address.barangay&.name}, #{@address.city_municipality&.name}, #{@address.province&.name}, #{@address.region&.name}" %></td>
+  <td><%= link_to "Edit", edit_address_path(address), class: "btn btn-outline-warning" %></td>
+</tr>
+</tbody>
+</table>
+
+</div>

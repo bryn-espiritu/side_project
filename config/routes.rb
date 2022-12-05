@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'invites/index'
   # get 'home/new'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Defines the root path route ("/")
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
     resources :home
     resource :user_profile
     resources :addresses
+    resources :invites
   end
 
   namespace :api do

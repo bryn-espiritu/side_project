@@ -3,7 +3,7 @@
   <div class="d-flex justify-content-center">
     <div class="btn-group" role="group" aria-label="Basic example">
       <button type="button" class="btn btn-outline-dark pe-5">SHARE</button>
-      <button type="button" class="btn btn-outline-dark pe-5">INVITE</button>
+      <%= link_to "INVITE", invites_path, class: "btn btn-outline-dark pe-5" %>
       <button type="button" class="btn btn-outline-dark pe-5">LOTTERY</button>
       <button type="button" class="btn btn-outline-dark pe-5">SHOP</button>
     <%= link_to "ME", user_profile_path, class: "btn btn-outline-dark pe-5" %>

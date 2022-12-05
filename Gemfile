@@ -38,6 +38,8 @@ gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
 
 gem 'rest-client'
 
+gem "rqrcode", "~> 2.0"
+
 gem 'active_model_serializers', '~> 0.10.0'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -76,3 +78,5 @@ group :development do
   # gem "spring"
 end
 
+
+gem "chunky_png", "~> 1.4"

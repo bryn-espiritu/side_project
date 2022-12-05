@@ -2,6 +2,7 @@ class AddressesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_address, only: [:edit, :update, :destroy]
 
+
   def index
     @many_address = current_user.addresses.includes(:user, :region, :province, :city_municipality, :barangay)
   end
@@ -46,5 +47,6 @@ class AddressesController < ApplicationController
   def set_address
     @address = Address.find(params[:id])
   end
+
 
 end

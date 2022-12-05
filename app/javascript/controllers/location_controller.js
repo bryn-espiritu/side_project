@@ -12,6 +12,10 @@ export default class extends Controller {
             dataType: 'json',
             success: (response) => {
                 console.log(response)
+                let option = document.createElement('option')
+                option.value = ''
+                option.text = 'Please select'
+                target.appendChild(option)
                 $.each(response, function (index, record) {
                     let option = document.createElement('option')
                     option.value = record.id
@@ -32,6 +36,10 @@ export default class extends Controller {
             dataType: 'json',
             success: (response) => {
                 console.log(response)
+                let option = document.createElement('option')
+                option.value = ''
+                option.text = 'Please select'
+                target.appendChild(option)
                 $.each(response, function (index, record) {
                     let option = document.createElement('option')
                     option.value = record.id
@@ -50,8 +58,13 @@ export default class extends Controller {
             url: '/api/regions/' + this.selectedRegionIdTarget.value + '/provinces/' + this.selectProvinceIdTarget.value + '/city_municipalities/' +
                 this.selectCityMunicipalityIdTarget.value + '/barangays',
             dataType: 'json',
+
             success: (response) => {
                 console.log(response)
+                let option = document.createElement('option')
+                option.value = ''
+                option.text = 'Please select'
+                target.appendChild(option)
                 $.each(response, function (index, record) {
                     let option = document.createElement('option')
                     option.value = record.id

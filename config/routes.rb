@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'invites/index'
   # get 'home/new'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Defines the root path route ("/")
@@ -12,12 +11,14 @@ Rails.application.routes.draw do
   end
 
   constraints(ClientDomainConstraint.new) do
-    devise_for :users, controllers: { sessions: 'users/sessions' , registrations: 'users/registrations'}
+    devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
     root "home#index"
+    namespace :user do
+      resources :invites
+      resources :addresses
+      resource :user_profile
+    end
     resources :home
-    resource :user_profile
-    resources :addresses
-    resources :invites
   end
 
   namespace :api do

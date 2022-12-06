@@ -1,4 +1,4 @@
-class InvitesController < ApplicationController
+class User::InvitesController < ApplicationController
   require 'rqrcode'
   def index
     @qrcode = qr_code_download
@@ -19,6 +19,6 @@ class InvitesController < ApplicationController
   end
 
   def invite_link
-        request.base_url + "client.com:3000/users/sign_up?promoter=#{current_user.email}"
+    "#{request.base_url}/users/sign_up?promoter=#{current_user.email}"
   end
 end

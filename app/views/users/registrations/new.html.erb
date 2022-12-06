@@ -1,29 +1,44 @@
-<h2>Sign up</h2>
+<h2 class="text-center my-5">Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+<div class="container my-5 w-50">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
+    <div class="form-control bg-light">
+      <div class="container w-50">
+        <div class="field text-center">
+          <% if cookies[:promoter] %>
+            <label class="h4" for="promoter">Promoter Name</label>
+            <p>this is proof that you have been invited by this user</p>
+            <div>
+              <%= f.email_field :parent, autofocus: true, autocomplete: "email", class: "form-control text-center",
+                                style: "outline: none;" ,value: cookies[:promoter], readonly: true %>
+            </div>
+          <% end %>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= f.label :email %><br/>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <div class="field my-2">
+        <h5><%= f.label :email %></h5>
+        <%= f.email_field :email, autofocus: true, class: "form-control", autocomplete: "email" %>
+      </div>
+
+      <div class="field my-2">
+        <h5><%= f.label :password %> <span style="color: red">
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %></span></h5>
+        <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
+      </div>
+
+      <div class="field my-2">
+        <h5><%= f.label :password_confirmation %></h5>
+        <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
+      </div>
+
+      <div class="actions text-center my-5">
+        <%= f.submit "Sign up", class: "btn btn-outline-success w-25" %>
+      </div>
+  <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br/>
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br/>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+  <%= render "users/shared/links" %>
+</div>

@@ -1,4 +1,5 @@
 class Address < ApplicationRecord
+  ADDRESS_LIMIT = 5
   belongs_to :user, class_name:  'User', foreign_key: 'user_id'
   belongs_to :region, class_name: 'Region', foreign_key: 'region_id'
   belongs_to :province, class_name: 'Province', foreign_key: 'province_id'
@@ -20,6 +21,12 @@ class Address < ApplicationRecord
 
   def move_default
     user.address.is_default.where('id: != ?', id)
+  end
+
+  def address_limit
+    self.user.address.reload.count >= ADDRESS_LIMIT
+    error.add(:base, "ERROR: Address limit reached. Edit or delete unnecessary addresses")
+
   end
 
 end

@@ -1,15 +1,15 @@
 <%= render 'layouts/bootsrap_fontawesome_tools' %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <p class="navbar-brand disabled"><%= "Hello #{current_user.email}" if current_user %></p>
+    <p class="navbar-brand disabled"><%= "Hello #{current_admin_user.email}" if current_admin_user %></p>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
       <div class="d-flex text-center">
-        <div class="nav-item dropdown btn btn-outline-dark">
+        <div class="nav-item dropdown btn btn-outline-dark mx-3">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Username</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><%= link_to "Profile", edit_admin_user_registration_path, class: "nav-link", style: "background: none; border: none; color: blue" if admin_user_signed_in? %></li>
+            <li><%= link_to "Profile", edit_admin_user_registration_path(@users), class: "nav-link", style: "background: none; border: none; color: blue" if admin_user_signed_in? %></li>
             <li><%= link_to "Sign in", new_user_session_path, class: "nav-link", style: "background: none; border: none; color: green" unless admin_user_signed_in? %></li>
             <li><%= button_to 'Sign-Out', destroy_user_session_path, class: "nav-link", style: "background: none; border: none; color: red", method: :delete if admin_user_signed_in? %></li>
             </li>

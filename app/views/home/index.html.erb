@@ -1,5 +1,5 @@
 <%= render 'layouts/client_navbar' %>
-<h1><%= "Welcome #{current_user.email}" %></h1>
+<h1><%= "Welcome #{current_user.email}" if user_signed_in? %></h1>
 <p>Welcome to Home Index</p>
 
 <%= render 'layouts/client_footer' %>

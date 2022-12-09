@@ -1,0 +1,45 @@
+<h1>Index for Item <span> <%= link_to 'Create', new_admin_item_path, class: 'btn btn-info' %></span></h1>
+
+<table class="table text-center">
+  <thead>
+  <tr>
+  <th>ID</th>
+  <th>Image</th>
+  <th>Name</th>
+  <th>Quantity</th>
+  <th>Minimum Bets</th>
+  <th>State</th>
+  <th>Batch Count</th>
+  <th>Online</th>
+  <th>Offline</th>
+  <th>Start at</th>
+  <th>Status</th>
+  <th>Action</th>
+  </tr>
+  </thead>
+  <%# unless @items.present? %>
+<!--    <h2>No item to show</h2>-->
+  <%# end %>
+  <% @items.each do |item| %>
+    <tr>
+      <td><%= item.id %></td>
+      <td><%= image_tag item.image.url, style: 'height:50px' if item.image?%></td>
+      <td><%= item.name %></td>
+      <td><%= item.quantity %></td>
+      <td><%= item.minimum_bets %></td>
+      <td><%= item.state %></td>
+      <td><%= item.batch_count %></td>
+      <td><%= item.online_at %></td>
+      <td><%= item.offline_at %></td>
+      <td><%= item.start_at %></td>
+      <td><%= item.status %></td>
+      <td>
+        <%= link_to 'Edit', edit_admin_item_path(item), class: 'btn btn-info' %>
+        <%= link_to 'Delete', admin_item_path(item), method: :delete, class: 'btn btn-danger' %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+</div>
+
+</table>

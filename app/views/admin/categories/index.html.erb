@@ -1,0 +1,13 @@
+<h1>Category List <span><%= link_to 'New', new_admin_category_path, class: "btn btn-outline-info" %></span> </h1>
+
+
+<% @categories.each do |category| %>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= category.name %></h5>
+    <h6 class="card-subtitle mb-2 text-muted">ID no. <%= category.id %></h6>
+    <%= link_to 'Edit', edit_admin_category_path(category), class: "card-link" %>
+    <%= button_to 'Delete', admin_category_path(category), method: :delete, class: "card-link"%>
+  </div>
+</div>
+<% end %>

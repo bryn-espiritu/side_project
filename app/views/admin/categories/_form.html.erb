@@ -1,0 +1,12 @@
+
+<div class="container w-50">
+  <%= form_with model: category, url: path, data: { turbo: false } do |f| %>
+    <label for="name">Categories</label>
+    <%= f.text_field :name, placeholder: "Enter Name", class: "form-control" %>
+    <%= f.submit class: "btn btn-outline-success" %>
+  <% end %>
+
+</div>
+<div class="text-center">
+<%= link_to 'Back', :back, class: "btn btn-outline-warning w-25" %>
+</div>

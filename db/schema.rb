@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_09_070543) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_09_090312) do
   create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
     t.integer "genre", default: 0
     t.string "name"
@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_070543) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "delete_at"
   end
 
   create_table "city_municipalities", charset: "utf8mb4", force: :cascade do |t|

@@ -1,40 +1,46 @@
 <div class="container">
   <%= form_with model: item, url: path do |f| %>
 
-      <div class="field">
+      <div class="field" my-5>
         <%= f.label :image %>
         <%= f.file_field :image, class: 'form-control' %>
       </div>
 
-      <div class="field">
+      <div class="field  my-5">
         <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control' %>
       </div>
 
-      <div class="field">
+      <div class="field my-5">
         <%= f.label :quantity %>
         <%= f.text_field :quantity, class: 'form-control' %>
       </div>
 
-      <div class="field">
+      <div class="field my-5">
         <%= f.label :minimum_bets %>
         <%= f.text_field :minimum_bets, class: 'form-control' %>
       </div>
 
-      <div class="field">
+      <div class="field my-5">
         <%= f.label :online_at %>
         <%= f.datetime_field :online_at, class: 'form-control' %>
       </div>
 
-      <div class="field">
+      <div class="field my-5">
         <%= f.label :offline_at %>
         <%= f.datetime_field :offline_at, class: 'form-control' %>
       </div>
 
-      <div class="field">
+      <div class="field my-5">
         <%= f.label :start_at %>
         <%= f.date_field :start_at, class: 'form-control' %>
       </div>
+
+    <div class="my-5">
+      <%= f.label :category.name %>
+      <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
+
+    </div>
 
     <div class="my-3">
       <label for="status"> Status</label>
@@ -43,9 +49,9 @@
           <%= f.label status.to_sym %>
         <% end %></p>
     </div>
-
-      <%= f.submit "Update", class: 'border btn btn-primary' %>
+    <div class="my-3">
+      <%= f.submit class: 'border btn btn-outline-success' %>
     <% end %>
-
-  <%= link_to 'Back', :back, class: 'btn btn-primary' %>
+  <%= link_to 'Back', :back, class: 'btn btn-outline-dark' %>
+  </div>
 </div>

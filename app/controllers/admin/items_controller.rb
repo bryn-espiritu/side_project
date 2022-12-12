@@ -1,8 +1,8 @@
 class Admin::ItemsController < ApplicationController
-  before_action :set_item, only: [:edit, :update, :destroy]
+  before_action :set_item, only: [:edit, :update, :destroy, :start, :pause, :end, :cancel]
 
   def index
-    @items = Item.all
+    @items = Item.includes(:categories).all
   end
 
   def new
@@ -35,13 +35,40 @@ class Admin::ItemsController < ApplicationController
     end
   end
 
+  def start
+    if @item.start!
+      flash[:notice] = "Successfully Started!"
+    else
+      flash[:alert] = @item.errors.full_messages.join(', ')
+    end
+    redirect_to admin_items_path
+  end
+
+  def pause
+    if @item.pause!
+      flash[:notice] = "Successfully Paused!"
+    else
+      flash[:alert] = @item.errors.full_messages.join(', ')
+    end
+    redirect_to admin_items_path
+  end
+
+  def cancel
+    if @item.cancel!
+      flash[:notice] = "Successfully Cancelled!"
+    else
+      flash[:alert] = @item.errors.full_messages.join(', ')
+    end
+    redirect_to admin_items_path
+  end
+
   private
 
   def item_params
-    params.require(:item).permit(:image, :name, :minimum_bets, :state, :batch_count, :online_at, :offline_at, :start_at, :status, :quantity)
+    params.require(:item).permit(:image, :name, :minimum_bets, :state, :batch_count, :online_at, :offline_at, :start_at, :status, :quantity, category_ids: [])
   end
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:id] || params[:item_id])
   end
 end

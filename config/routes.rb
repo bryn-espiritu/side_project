@@ -7,7 +7,9 @@ Rails.application.routes.draw do
       root "users#index"
       devise_for :users, controllers: { sessions: 'admins/sessions' }
       resources :users
-      resources :items
+      resources :items do
+        put :start, :pause, :cancel, :end
+      end
       resources :categories
     end
   end

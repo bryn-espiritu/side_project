@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (5.4.0)
+      concurrent-ruby (~> 1.0)
     actioncable (7.0.4)
       actionpack (= 7.0.4)
       activesupport (= 7.0.4)
@@ -240,6 +242,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  aasm
   active_model_serializers (~> 0.10.0)
   bootsnap
   carrierwave (>= 3.0.0.beta, < 4.0)

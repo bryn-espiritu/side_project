@@ -1,16 +1,7 @@
 class Item < ApplicationRecord
   has_many :item_category_ships
   has_many :categories, through: :item_category_ships
-  # validates_presence_of :image
-  # validates_presence_of :name
-  # validates_presence_of :quantity
-  # validates_presence_of :minimum_bets
-  # validates_presence_of :state
-  # validates_presence_of :batch_count
-  # validates_presence_of :online_at
-  # validates_presence_of :offline_at
-  # validates_presence_of :start_at
-  # validates_presence_of :status
+  # validates_presence_of :image, :name, :quantity, :minimum_bets, :state, :batch_count, :online_at, :offline_at, :start_at, :status\
 
   mount_uploader :image, ImageUploader
   enum status: { active: 0, inactive: 1 }
@@ -20,4 +11,48 @@ class Item < ApplicationRecord
     update(deleted_at: Time.current)
   end
 
+  include AASM
+  aasm column: :state do
+    state :pending, initial: true
+    state :starting, :paused, :ended, :cancelled
+
+    event :start do
+      transitions from: [:pending, :ended, :cancelled], to: :starting, after: :batch_quantity
+      transitions from: :paused, to: :starting
+    end
+
+    event :pause do
+      transitions from: :starting, to: :paused
+    end
+
+    event :end do
+      transitions from: :starting, to: :ended
+    end
+
+    event :cancel, after: :add_quantity do
+      transitions from: [:starting, :paused], to: :cancelled
+    end
+  end
+
+  def add_quantity
+    @add_quantity = self.quantity + 1
+    update(quantity: @add_quantity)
+  end
+
+  def batch_quantity
+    self.update(quantity: self.quantity - 1, batch_count: self.batch_count + 1)
+  end
+
+  def greater_than_zero?
+    quantity > 0
+  end
+
+  def future?
+    Time.now < offline_at
+  end
+
+  def active?
+    status == 'active'
+  end
 end
+

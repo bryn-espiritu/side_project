@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_09_090312) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_12_034443) do
   create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
     t.integer "genre", default: 0
     t.string "name"
@@ -78,7 +78,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_090312) do
     t.string "name"
     t.integer "quantity"
     t.integer "minimum_bets"
-    t.integer "batch_count"
     t.datetime "online_at"
     t.datetime "offline_at"
     t.datetime "start_at"
@@ -87,6 +86,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_090312) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.integer "batch_count", default: 0
   end
 
   create_table "provinces", charset: "utf8mb4", force: :cascade do |t|

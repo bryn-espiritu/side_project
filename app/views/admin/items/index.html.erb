@@ -38,9 +38,9 @@
           <%= button_to 'Delete', admin_item_path(item), method: :delete, class: 'btn btn-danger' %>
         </td>
         <td>
-          <%= button_to 'Start', admin_item_start_path(item), method: :put, class: 'btn btn-outline-success btn-sm' %>
-          <%= button_to 'Pause', admin_item_pause_path(item), method: :put, class: 'btn btn-outline-warning btn-sm' %>
-          <%= button_to 'Cancel', admin_item_cancel_path(item), method: :put, class: 'btn btn-outline-danger btn-sm' %>
+          <%= button_to 'Start', admin_item_start_path(item), method: :put, class: 'btn btn-outline-success btn-sm' if item.may_start? %>
+          <%= button_to 'Pause', admin_item_pause_path(item), method: :put, class: 'btn btn-outline-warning btn-sm' if item.may_pause? %>
+          <%= button_to 'Cancel', admin_item_cancel_path(item), method: :put, class: 'btn btn-outline-danger btn-sm' if item.may_cancel? %>
         </td>
       </tr>
     <% end %>

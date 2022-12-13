@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :user do
+    get 'lotteries/index'
+  end
   # get 'home/new'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Defines the root path route ("/")
@@ -21,6 +24,7 @@ Rails.application.routes.draw do
       resources :invites
       resources :addresses
       resource :user_profile
+      resources :lotteries
     end
     resources :home
   end

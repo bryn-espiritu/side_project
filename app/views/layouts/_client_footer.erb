@@ -1,14 +1,15 @@
-<footer class="text-center text-lg-start bg-light text-muted mt-auto">
-  <div class="container-fluid">
-  <div class="d-flex justify-content-center">
-    <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-outline-dark pe-5">SHARE</button>
-      <%= link_to "INVITE", user_invites_path, class: "btn btn-outline-dark pe-5" %>
-      <button type="button" class="btn btn-outline-dark pe-5">LOTTERY</button>
-      <button type="button" class="btn btn-outline-dark pe-5">SHOP</button>
-    <%= link_to "ME", user_user_profile_path, class: "btn btn-outline-dark pe-5" %>
-    </div>
-
+<footer class="text-center text-lg-starttext-muted mt-auto" style="background-color: rgba(0, 0, 0, 0.2);">
+  <div class="mt-2">
+    <section class="py-3">
+      <a class="mx-5" href="#" style="color: black; text-decoration: none">SHARE</a>
+      <%= link_to "INVITE", user_invites_path, class: "mx-5", style: "color: black; text-decoration: none" if user_signed_in? %>
+      <%= link_to "LOTTERY", user_lotteries_path, class: "mx-5", style: "color: black; text-decoration: none" %>
+      <a class="mx-5" href="#" style="color: black; text-decoration: none">SHOP</a>
+      <%= link_to "ME", user_user_profile_path, class: "mx-5", style: "color: black; text-decoration: none" if user_signed_in? %>
+    </section>
   </div>
+  <div class="text-center text-dark p-2" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2022 Copyright:
+    <a class="text-dark" href="https://github.com/brynex20/side_project.git">Koda Camp Side Project</a>
   </div>
 </footer>

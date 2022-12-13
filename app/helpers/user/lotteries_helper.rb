@@ -1,0 +1,2 @@
+module User::LotteriesHelper
+end

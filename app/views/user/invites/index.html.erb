@@ -1,4 +1,5 @@
 <%= render "layouts/client_navbar" %>
+<%= render "layouts/notification_messages" %>
 <div class="container">
   <div class="border-3 mb-5 d-flex justify-content-center "> <%= @qrcode if user_signed_in? %></div>
   <div class="text-center alert alert-info w-100"><%=  @invite_link if user_signed_in? %></div>

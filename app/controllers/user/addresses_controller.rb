@@ -16,7 +16,7 @@ class User::AddressesController < ApplicationController
     @address = Address.new(address_params)
     @address.user = current_user
     if @address.save
-      redirect_to addresses_path, notice: "Address is Successfully Submitted"
+      redirect_to user_addresses_path, notice: "Address is Successfully Submitted"
     else
       flash[:alert] = @address.errors.full_messages.join(', ')
       render :new
@@ -28,24 +28,25 @@ class User::AddressesController < ApplicationController
 
   def update
     if @address.update(address_params)
-      redirect_to addresses_path
+      redirect_to user_addresses_path
     end
   end
 
   def destroy
     if @address.destroy
-      redirect_to addresses_path, notice: "Address successfully deleted"
+      redirect_to user_addresses_path, notice: "Address successfully deleted"
     end
   end
 
   private
 
   def address_params
-    params.require(:address).permit(:genre, :is_default, :name, :street_address, :phone_number, :region_id, :province_id, :city_municipality_id, :barangay_id, :remark)
+    params.require(:address).permit(:genre, :is_default, :name, :street_address, :phone_number,
+                                    :region_id, :province_id, :city_municipality_id, :barangay_id, :remark)
   end
 
   def set_address
-    @address = Address.find(params[:id])
+    @address = Address.find(params[:id] || params[:address_id])
   end
 
 

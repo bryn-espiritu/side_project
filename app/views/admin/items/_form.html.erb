@@ -36,9 +36,13 @@
         <%= f.date_field :start_at, class: 'form-control' %>
       </div>
 
-    <div class="my-5">
+    <div class="field my-5">
       <%= f.label :category.name %>
-      <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
+      <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |b| %>
+        <%= b.label class:"label-checkbox px-2" do%>
+          <%= b.check_box + b.text%>
+        <%end%>
+      <% end %>
 
     </div>
 

@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   has_many :item_category_ships
+  has_many :bets
   has_many :categories, through: :item_category_ships
   # validates_presence_of :image, :name, :quantity, :minimum_bets, :state, :batch_count, :online_at, :offline_at, :start_at, :status\
 

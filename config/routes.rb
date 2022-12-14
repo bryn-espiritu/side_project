@@ -14,6 +14,9 @@ Rails.application.routes.draw do
         put :start, :pause, :cancel, :end
       end
       resources :categories
+      resources :bets do
+        put :cancel
+      end
     end
   end
 

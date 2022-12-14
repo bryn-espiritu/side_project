@@ -6,8 +6,10 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 #
-Category.find_or_create_by(name: "Phones")
-Category.find_or_create_by(name: "Laptops")
-Category.find_or_create_by(name: "Desktop")
-Category.find_or_create_by(name: "Accessories")
+# Category.find_or_create_by(name: "Phones")
+# Category.find_or_create_by(name: "Laptops")
+# Category.find_or_create_by(name: "Desktop")
+# Category.find_or_create_by(name: "Accessories")
+
+User.create!(email: "brynespiritu@gmail.com", password: '7292000', password_confirmation: '7292000', role: 1)
 

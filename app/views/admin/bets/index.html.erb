@@ -1,0 +1,65 @@
+<h1 class="text-center">Bet Lists</h1>
+
+<div class="card w-100 bg-light my-2">
+  <div class="card-body">
+    <%= form_tag({ url: admin_bets_path }, { method: :get }) do %>
+      <div class="row text-lg-start">
+        <div class="col-6">
+          <%= label_tag :serial_number %>
+          <%= text_field_tag :serial_number, '', class: "form-control" %>
+        </div>
+        <div class="col-6">
+          <%= label_tag :name, 'Product Name' %>
+          <%= text_field_tag :item.name, '', class: "form-control" %>
+        </div>
+        <div class="col-6">
+          <%= label_tag :email %>
+          <%= text_field_tag :email, '', class: "form-control" %>
+        </div>
+        <div class="col-6">
+          <%= label_tag :state %>
+          <%= select_tag :state, options_for_select(Bet.aasm.states.map(&:name)), { prompt: 'Choose State', class: "form-control form-select text-center" } %>
+        </div>
+      </div>
+      </div>
+      <div class="input-group my-3">
+        <span class="input-group-text">Date</span>
+        <%= datetime_field_tag :start, '', class: "form-control", value: params[:start] %>
+        <%= datetime_field_tag :end, '', class: "form-control", value: params[:end] %>
+      </div>
+      <div class="row p-3">
+        <div class="col">
+          <%= submit_tag :Search, class: "btn btn-outline-primary mt-2 w-100" %>
+        </div>
+        <div class="col">
+          <%= link_to 'Reset', admin_bets_path, class: "btn btn-outline-danger mt-2 w-100" %>
+        </div>
+      </div>
+    <% end %>
+
+    </div>
+
+<div class="">
+  <table class="table">
+    <thead>
+    <tr class="bg-dark" style="color: white">
+      <th>Serial Number</th>
+      <th>Item Name</th>
+      <th>State</th>
+      <th>Coins</th>
+      <th>Date</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <% @bets.each do |bet| %>
+      <tr>
+        <td><%= bet.serial_number %></td>
+        <td><%= bet.item.name %></td>
+        <td><%= bet.state %></td>
+        <td><%= bet.coin %></td>
+        <td><%= bet.created_at %></td>
+      <td><%= link_to 'Cancel', admin_bet_cancel_path(bet), method: :put, class: "btn btn-outline-secondary" %></td>
+    <% end %>
+    </tr>
+  </table>
+</div>

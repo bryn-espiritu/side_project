@@ -1,5 +1,7 @@
 <h2>Log in</h2>
+<%= render "layouts/notification_messages" %>
 
+<div class="container form-control w-25">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
@@ -22,5 +24,10 @@
     <%= f.submit "Log in" %>
   </div>
 <% end %>
+  <div class="alert alert-light">
+  <%= render "users/shared/links" %>
+  </div>
+</div>
 
-<%= render "users/shared/links" %>
+
+

@@ -1,7 +1,5 @@
-<%= render "layouts/client_navbar" %>
-
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-<h4><%= "Email Account: #{current_user.email}" %></h4>
+<h2 class="text-center mt-5">Edit <%= resource_name.to_s.humanize %></h2>
+<h4 class="text-center"><%= "Email Account: #{current_user.email}" %></h4>
 <%= form_for(resource, as: resource_name, url: user_registration_path, data: { turbo: false }, method: :put) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
   <div class="container form-control">
@@ -55,10 +53,13 @@
     </div>
 <% end %>
 </div>
-<h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<div class="container alert alert-danger mt-5 w-50">
+  <h4 class=" text-center my-3">Cancel Account?</h4>
+      <%= button_to "Cancel", registration_path(resource_name),
+                    onclick: "return confirm('Are you sure you want to delete?')",
+                    method: :delete, class: "btn btn-outline-danger w-100 my-2" %>
 
-<%= link_to "Back", :back %>
+</div>
 
-<%= render 'layouts/client_footer' %>
+

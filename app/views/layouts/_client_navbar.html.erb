@@ -2,6 +2,15 @@
   <div class="container-fluid">
     <a class="navbar-brand">Brand Image</a>
     <div class="d-flex">
+      <% if user_signed_in? %>
+        <button class=" badge bg-secondary me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <%= "Welcome #{current_user.email}" %></button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <%= button_to 'Sign-Out', destroy_user_session_path, class: "btn btn-sm btn-outline-danger me-3", method: :delete %>
+          </div>
+        </div>
+      <% end %>
       <button class="btn btn-outline-warning me-3" type="submit">Coins</button>
       <button class="btn btn-outline-info me-3" type="submit">Claims</button>
       <button class="nav-item dropdown btn btn-outline-dark me-3">
@@ -11,18 +20,17 @@
           <li><a class="dropdown-item" href="#">Chinese</a></li>
         </ul>
       </button>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      <button class="nav-item dropdown btn btn-outline-dark me-3">
+        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span class="navbar-toggler-icon"></span></a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><%= link_to "Home", home_index_path, class: "nav-item nav-link active" %></li>
+          <li><%= link_to "Profile", edit_user_registration_path, class: "nav-link", style: "background: none; border: none; color: blue" if user_signed_in? %></li>
+          <li><%= link_to "Sign in", new_user_session_path, class: "nav-link", style: "background: none; border: none; color: green" unless user_signed_in? %></li>
+        </ul>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <%= link_to "Home", home_index_path, class: "nav-item nav-link active" %>
-          <%= link_to "Profile", edit_user_registration_path, class: "nav-link", style: "background: none; border: none; color: blue" if user_signed_in? %>
-          <%= link_to "Sign in", new_user_session_path, class: "nav-link", style: "background: none; border: none; color: green" unless user_signed_in? %>
-          <%= button_to 'Sign-Out', destroy_user_session_path, class: "nav-link", style: "background: none; border: none; color: red", method: :delete if user_signed_in? %>
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </div>
-      </div>
     </div>
   </div>
 </nav>
+
+
+

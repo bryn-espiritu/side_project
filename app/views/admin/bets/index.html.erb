@@ -1,4 +1,5 @@
 <h1 class="text-center">Bet Lists</h1>
+<%= render 'layouts/notification_messages' %>
 
 <div class="card w-100 bg-light my-2">
   <div class="card-body">
@@ -9,7 +10,7 @@
           <%= text_field_tag :serial_number, '', class: "form-control" %>
         </div>
         <div class="col-6">
-          <%= label_tag :name, 'Product Name' %>
+          <%= label_tag :name, 'Item Name' %>
           <%= text_field_tag :item.name, '', class: "form-control" %>
         </div>
         <div class="col-6">
@@ -24,8 +25,8 @@
       </div>
       <div class="input-group my-3">
         <span class="input-group-text">Date</span>
-        <%= datetime_field_tag :start, '', class: "form-control", value: params[:start] %>
-        <%= datetime_field_tag :end, '', class: "form-control", value: params[:end] %>
+        <%= datetime_field_tag :created_at, '', class: "form-control", value: params[:created_at] %>
+        <%= datetime_field_tag :ended_at, '', class: "form-control", value: params[:ended_at] %>
       </div>
       <div class="row p-3">
         <div class="col">
@@ -36,14 +37,14 @@
         </div>
       </div>
     <% end %>
-
     </div>
 
-<div class="">
-  <table class="table">
+<div>
+  <table class="table table-striped">
     <thead>
     <tr class="bg-dark" style="color: white">
       <th>Serial Number</th>
+      <th>User Email</th>
       <th>Item Name</th>
       <th>State</th>
       <th>Coins</th>
@@ -51,15 +52,18 @@
       <th>Action</th>
     </tr>
     </thead>
+    <tbody>
     <% @bets.each do |bet| %>
       <tr>
         <td><%= bet.serial_number %></td>
+        <td><%= bet.user&.email %></td>
         <td><%= bet.item.name %></td>
         <td><%= bet.state %></td>
         <td><%= bet.coin %></td>
         <td><%= bet.created_at %></td>
-      <td><%= link_to 'Cancel', admin_bet_cancel_path(bet), method: :put, class: "btn btn-outline-secondary" %></td>
+        <td><%= button_to 'Cancel', admin_bet_cancel_path(bet.id), method: :put, class: "btn btn-outline-secondary" %></td>
     <% end %>
     </tr>
+    </tbody>
   </table>
 </div>

@@ -35,16 +35,15 @@
   <% end %>
 </div>
 <div class="d-flex justify-content-lg-start">
-  <div class="container">
+  <div class="container mt-5">
       <div class="row">
         <% @items.each do |item| %>
           <div class="col-lg-6 my-3">
-            <div class="card d-flex justify-content-center" style="width: 50%;">
-              <%= image_tag item.image.url, style: 'height:280px; width: 100%' if item.image? %>
+            <div class="card d-flex justify-content-center" style="width: 100%;">
+              <%= link_to (image_tag item.image.url, style: 'height:450px; width: 100%' if item.image?), user_lottery_path(item)  %>
               <div class="card-body">
-                <h5 class="card-title"><%= item.name %></h5>
-                <p><%= item.categories.pluck(:name).join(',') %></p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h5 class="card-title">Title: <%= item.name %></h5>
+                <p>Categories: <%= item.categories.pluck(:name).join(',') %></p>
               </div>
             </div>
           </div>

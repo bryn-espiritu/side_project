@@ -5,5 +5,7 @@ class Admin::BetsController < AdminController
     @bets = @bets.where(item: {name: params[:item.name]}) if params[:item.name].present?
     @bets = @bets.where(user: {email: params[:email]}) if params[:email].present?
     @bets = @bets.where(state: params[:state]) if params[:state].present?
+    @bets = @bets.where()
   end
 end
+

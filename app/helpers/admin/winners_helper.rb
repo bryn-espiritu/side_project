@@ -1,0 +1,2 @@
+module Admin::WinnersHelper
+end

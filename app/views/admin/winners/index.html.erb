@@ -1,0 +1,73 @@
+<div class="card w-100 bg-light my-2">
+  <div class="card-body">
+    <%= form_tag({ url: admin_winners_path }, { method: :get }) do %>
+      <div class="row text-lg-start">
+        <div class="col-6">
+          <%= label_tag :serial_number %>
+          <%= text_field_tag :serial_number, '', class: "form-control" %>
+        </div>
+        <div class="col-6">
+          <%= label_tag :name, 'Item Name' %>
+          <%= text_field_tag :item.name, '', class: "form-control" %>
+        </div>
+        <div class="col-6">
+          <%= label_tag :email %>
+          <%= text_field_tag :email, '', class: "form-control" %>
+        </div>
+        <div class="col-6">
+          <%= label_tag :state %>
+          <%= select_tag :state, options_for_select(Winner.aasm.states.map(&:name)), { prompt: 'Choose State', class: "form-control form-select text-center" } %>
+        </div>
+      </div>
+      </div>
+      <div class="input-group my-3">
+        <span class="input-group-text">Date</span>
+        <%= datetime_field_tag :created_at, '', class: "form-control", value: params[:created_at] %>
+        <%= datetime_field_tag :ended_at, '', class: "form-control", value: params[:ended_at] %>
+      </div>
+      <div class="row p-3">
+        <div class="col">
+          <%= submit_tag :Search, class: "btn btn-outline-primary mt-2 w-100" %>
+        </div>
+        <div class="col">
+          <%= link_to 'Reset', admin_bets_path, class: "btn btn-outline-danger mt-2 w-100" %>
+        </div>
+      </div>
+    <% end %>
+    </div>
+
+<div class="my3">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Serial Number</th>
+      <th>Batch Count</th>
+      <th>Email Address</th>
+      <th>Address</th>
+      <th>Date</th>
+      <th>State</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @winners.each do |winner| %>
+      <tr>
+        <td><%= winner.bet.serial_number %></td>
+        <td><%= winner.item.name %></td>
+        <td><%= winner.user.email %></td>
+        <td><%= api_address(winner.address) %></td>
+        <td><%= winner.created_at %></td>
+        <td><%= winner.state %></td>
+        <td>
+          <%= link_to "Submit", admin_winner_submit_path(winner), method: :put if winner.may_submit? %>
+          <%= link_to "Pay", admin_winner_pay_path(winner), method: :put if winner.may_pay? %>
+          <%= link_to "Ship", admin_winner_ship_path(winner), method: :put if winner.may_ship? %>
+          <%= link_to "Deliver", admin_winner_deliver_path(winner), method: :put if winner.may_deliver? %>
+          <%= link_to "Publish", admin_winner_publish_path(winner), method: :put if winner.may_publish? %>
+          <%= link_to "Remove Publish", admin_winner_remove_publish_path(winner), method: :put if winner.may_publish? %>
+        </td>
+    <% end %>
+    </tr>
+    </tbody>
+  </table>
+</div>

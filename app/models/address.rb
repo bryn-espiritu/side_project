@@ -1,6 +1,7 @@
 class Address < ApplicationRecord
   ADDRESS_LIMIT = 5
   belongs_to :user, class_name: 'User', foreign_key: 'user_id'
+  has_many :winners
   belongs_to :region, class_name: 'Region', foreign_key: 'region_id'
   belongs_to :province, class_name: 'Province', foreign_key: 'province_id'
   belongs_to :city_municipality, class_name: 'CityMunicipality', foreign_key: 'city_municipality_id'

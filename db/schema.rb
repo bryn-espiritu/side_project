@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_13_100643) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_15_095607) do
   create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
     t.integer "genre", default: 0
     t.string "name"
@@ -143,6 +143,27 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_13_100643) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["parent_id"], name: "index_users_on_parent_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "winners", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "bet_id"
+    t.bigint "item_id"
+    t.bigint "user_id"
+    t.bigint "admin_id"
+    t.bigint "address_id"
+    t.integer "item_batch_count"
+    t.string "state"
+    t.string "price"
+    t.string "paid_at"
+    t.string "picture"
+    t.string "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_winners_on_address_id"
+    t.index ["admin_id"], name: "index_winners_on_admin_id"
+    t.index ["bet_id"], name: "index_winners_on_bet_id"
+    t.index ["item_id"], name: "index_winners_on_item_id"
+    t.index ["user_id"], name: "index_winners_on_user_id"
   end
 
 end

@@ -2,6 +2,7 @@ class Item < ApplicationRecord
   has_many :item_category_ships
   has_many :bets
   has_many :categories, through: :item_category_ships
+  has_many :winners
   # validates_presence_of :image, :name, :quantity, :minimum_bets, :state, :batch_count, :online_at, :offline_at, :start_at, :status\
 
   mount_uploader :image, ImageUploader
@@ -18,7 +19,7 @@ class Item < ApplicationRecord
     state :starting, :paused, :ended, :cancelled
 
     event :start do
-      transitions from: [:pending, :ended, :cancelled], to: :starting, after: :batch_quantity
+      transitions from: [:pending, :ended, :cancelled], to: :starting, after: :batch_quantity, guards: [:greater_than_zero?, :future?, :active?]
       transitions from: :paused, to: :starting
     end
 
@@ -30,7 +31,7 @@ class Item < ApplicationRecord
       transitions from: :starting, to: :ended
     end
 
-    event :cancel, after: :add_quantity do
+    event :cancel, after: [:add_quantity, :coin_return] do
       transitions from: [:starting, :paused], to: :cancelled
     end
   end
@@ -48,12 +49,13 @@ class Item < ApplicationRecord
     quantity > 0
   end
 
+  def coin_return
+    bets.where(batch_count: batch_count).where.not(state: :cancelled).each {|bet| bet.cancel!}
+  end
+
   def future?
     Time.now < offline_at
   end
 
-  def active?
-    status == 'active'
-  end
 end
 

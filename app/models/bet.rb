@@ -3,6 +3,7 @@ class Bet < ApplicationRecord
   belongs_to :item
   has_many :winners
   after_create :generate_serial_number, :deducted
+  after_validation :enough_coins?
 
   include AASM
   aasm column: :state do
@@ -34,5 +35,12 @@ class Bet < ApplicationRecord
   def deducted
     self.user.update!(coins: self.user.coins - coin)
   end
+
+  def enough_coins?
+    if self.user.coins < 1
+      errors.add(:base, "Not Enough Coins")
+    end
+  end
+
 end
 

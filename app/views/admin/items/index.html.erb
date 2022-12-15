@@ -41,6 +41,7 @@
           <%= button_to 'Start', admin_item_start_path(item), method: :put, class: 'btn btn-outline-success btn-sm' if item.may_start? %>
           <%= button_to 'Pause', admin_item_pause_path(item), method: :put, class: 'btn btn-outline-warning btn-sm' if item.may_pause? %>
           <%= button_to 'Cancel', admin_item_cancel_path(item), method: :put, class: 'btn btn-outline-danger btn-sm' if item.may_cancel? %>
+          <%= button_to 'End', admin_item_end_path(item), method: :put, class: 'btn btn-outline-danger btn-sm' if item.may_end?  %>
         </td>
       </tr>
     <% end %>

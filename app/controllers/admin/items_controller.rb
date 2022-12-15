@@ -62,6 +62,13 @@ class Admin::ItemsController < AdminController
     redirect_to admin_items_path
   end
 
+  def end
+    if @item.end!
+      flash[:notice] = "Successfully Ended"
+  else
+    flash[:alert] = @item.errors.full_messages.join(', ')
+    end
+  end
   private
 
   def item_params

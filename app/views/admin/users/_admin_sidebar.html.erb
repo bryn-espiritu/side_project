@@ -39,11 +39,14 @@
             <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
               <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Pages</span> </a>
             <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-              <li class="w-100 my-2">
+              <li class="w-100 my-1">
                 <%= link_to "Bets", admin_bets_path, style: "text-decoration: none" %>
               </li>
-              <li>
+              <li class="my-1">
                 <%= link_to "Category", admin_categories_path, style: "text-decoration: none" %>
+              </li>
+              <li class="my-1">
+                <%= link_to "Winners", admin_winners_path, style: "text-decoration: none" %>
               </li>
             </ul>
           </li>

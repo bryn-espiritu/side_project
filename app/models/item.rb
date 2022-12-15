@@ -28,7 +28,7 @@ class Item < ApplicationRecord
     end
 
     event :end do
-      transitions from: :starting, to: :ended
+      transitions from: :starting, to: :ended, guards: :enough_bets, after: :picked_winner
     end
 
     event :cancel, after: [:add_quantity, :coin_return] do
@@ -55,6 +55,20 @@ class Item < ApplicationRecord
 
   def future?
     Time.now < offline_at
+  end
+
+  def enough_bets
+    bets.where(batch_count: batch_count).count >= minimum_bets
+  end
+
+  def picked_winner
+    bet_list = bets.where(batch_count: batch_count).where.not(state: :cancelled)
+    winner = bet_list.sample
+    winner.win!
+    bet_list.where.not(state: :won).update_all(state: :lost)
+    winner_list = Winner.new(item_batch_count: winner.batch_count, user: winner.user, item: winner.item, bet: winner, address: winner.user.addresses.find_by(is_default: true))
+    winner_list.save!
+
   end
 
 end

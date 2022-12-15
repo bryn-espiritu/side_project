@@ -30,7 +30,7 @@
           <%= submit_tag :Search, class: "btn btn-outline-primary mt-2 w-100" %>
         </div>
         <div class="col">
-          <%= link_to 'Reset', admin_bets_path, class: "btn btn-outline-danger mt-2 w-100" %>
+          <%= link_to 'Reset', admin_winners_path, class: "btn btn-outline-danger mt-2 w-100" %>
         </div>
       </div>
     <% end %>
@@ -59,12 +59,12 @@
         <td><%= winner.created_at %></td>
         <td><%= winner.state %></td>
         <td>
-          <%= link_to "Submit", admin_winner_submit_path(winner), method: :put if winner.may_submit? %>
-          <%= link_to "Pay", admin_winner_pay_path(winner), method: :put if winner.may_pay? %>
-          <%= link_to "Ship", admin_winner_ship_path(winner), method: :put if winner.may_ship? %>
-          <%= link_to "Deliver", admin_winner_deliver_path(winner), method: :put if winner.may_deliver? %>
-          <%= link_to "Publish", admin_winner_publish_path(winner), method: :put if winner.may_publish? %>
-          <%= link_to "Remove Publish", admin_winner_remove_publish_path(winner), method: :put if winner.may_publish? %>
+          <%= button_to "Submit", admin_winner_submit_path(winner), method: :put if winner.may_submit? %>
+          <%= button_to "Pay", admin_winner_pay_path(winner), method: :put if winner.may_pay? %>
+          <%= button_to "Ship", admin_winner_ship_path(winner), method: :put if winner.may_ship? %>
+          <%= button_to "Deliver", admin_winner_deliver_path(winner), method: :put if winner.may_deliver? %>
+          <%= button_to "Publish", admin_winner_publish_path(winner), method: :put if winner.may_publish? %>
+          <%= button_to "Remove Publish", admin_winner_remove_publish_path(winner), method: :put if winner.may_publish? %>
         </td>
     <% end %>
     </tr>

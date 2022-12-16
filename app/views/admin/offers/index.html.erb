@@ -1,0 +1,60 @@
+<h1>Offer List <span><%= link_to "New", new_admin_offer_path %></span></h1>
+
+<div class="card">
+  <div class="card-body">
+    <%= form_tag({ url: admin_offers_path }, { method: :get }) do %>
+      <h6>Search</h6>
+      <div class="row">
+        <div class="col-md-5">
+          <%= select_tag :status, options_for_select(Offer.statuses.keys.map { |status| [status.humanize, status] }, params[:status]), { prompt: 'Search Status', class: "form-control form-select text-center text-primary" } %>
+        </div>
+        <div class="col-md-5">
+          <%= select_tag :genre, options_for_select(Offer.genres.keys.map { |genre| [genre.humanize, genre] }, params[:genre]), { prompt: 'Search Genre', class: "form-control form-select text-center text-primary" } %>
+        </div>
+        <div class="row p-3">
+          <div class="col">
+            <%= submit_tag :Search, class: "btn btn-outline-primary mt-2 w-50" %>
+          </div>
+          <div class="col">
+            <%= link_to 'Reset', admin_offers_path, class: "btn btn-outline-danger mt-2 w-50" %>
+          </div>
+        </div>
+      </div>
+      <div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="my-2">
+  <table class="table table-striped">
+    <thead class="bg-dark text-white">
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Genre</th>
+      <th>Status</th>
+      <th>Amount</th>
+      <th>Coin</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @offers.each do |offer| %>
+      <tr>
+        <td><%= image_tag offer.image.url, style: "height: 100px width: 100px" if offer.image? %></td>
+        <td><%= offer.name %></td>
+        <td><%= offer.genre %></td>
+        <td><%= offer.status %></td>
+        <td><%= offer.amount %></td>
+        <td><%= offer.coin %></td>
+        <th>
+          <%= link_to "Edit", edit_admin_offer_path(offer), class: "btn btn-sm btn-outline-warning" %>
+          <%= button_to "Delete", admin_offer_path(offer), method: :delete, class: "btn btn-sm btn-outline-warning" %>
+        </th>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+

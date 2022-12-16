@@ -48,6 +48,9 @@
               <li class="my-1">
                 <%= link_to "Winners", admin_winners_path, style: "text-decoration: none" %>
               </li>
+              <li class="my-1">
+                <%= link_to "Offers", admin_offers_path, style: "text-decoration: none" %>
+              </li>
             </ul>
           </li>
           <li>
@@ -58,6 +61,7 @@
       </div>
     </div>
     <div class="col py-3">
+      <%= render "layouts/notification_messages" %>
       <%= yield %>
     </div>
   </div>

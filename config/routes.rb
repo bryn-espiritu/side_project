@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  namespace :user do
-    get 'lotteries/index'
-  end
   # get 'home/new'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Defines the root path route ("/")
@@ -10,6 +7,7 @@ Rails.application.routes.draw do
       root "users#index"
       devise_for :users, controllers: { sessions: 'admins/sessions' }
       resources :users
+      resources :offers
       resources :items do
         put :start, :pause, :cancel, :end
       end

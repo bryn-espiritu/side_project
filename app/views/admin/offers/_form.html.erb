@@ -1,0 +1,44 @@
+<div class="container">
+  <%= form_with model: offer, url: path do |f| %>
+
+    <div class="field" my-5>
+      <%= f.label :image %>
+      <%= f.file_field :image, class: 'form-control' %>
+    </div>
+
+    <div class="field  my-5">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="field my-5">
+      <%= f.label :amount %>
+      <%= f.text_field :amount, class: 'form-control' %>
+    </div>
+
+    <div class="field my-5">
+      <%= f.label :coin %>
+      <%= f.text_field :coin, class: 'form-control' %>
+    </div>
+
+    <div class="my-3">
+      <label for="status"> Status</label>
+      <p><% Offer.statuses.keys.each do |status|  %>
+          <%= f.radio_button :status, status %>
+          <%= f.label status.to_sym %>
+        <% end %></p>
+    </div>
+
+    <div class="my-3">
+      <label for="genre"> Genre</label>
+      <p><% Offer.genres.keys.each do |genre|  %>
+          <%= f.radio_button :genre, genre %>
+          <%= f.label genre.to_sym %>
+        <% end %></p>
+    </div>
+    <div class="my-5">
+      <%= f.submit class: 'border btn btn-outline-success w-100' %>
+  <% end %>
+  <%= link_to 'Back', :back, class: 'btn btn-outline-dark w-100 my-2' %>
+  </div>
+</div>

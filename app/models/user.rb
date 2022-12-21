@@ -6,7 +6,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
   mount_uploader :image, ImageUploader
   validates :phone, phone: { possible: true, allow_blank: true, types: [:voip, :mobile], countries: :ph }
+  validates_numericality_of :coins, { greater_than_or_equal_to: 0 }
   enum role: { client: 0, admin: 1 }
+  has_many :orders
   has_many :bets
   has_many :winners
   has_many :homes

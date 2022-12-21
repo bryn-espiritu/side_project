@@ -35,6 +35,10 @@ Rails.application.routes.draw do
       resources :addresses
       resource :user_profile
       resources :lotteries
+      resources :shop
+      resources :winners do
+        put :claim
+      end
     end
     resources :home
   end

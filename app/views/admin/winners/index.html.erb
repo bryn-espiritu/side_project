@@ -59,12 +59,12 @@
         <td><%= winner.created_at %></td>
         <td><%= winner.state %></td>
         <td>
-          <%= button_to "Submit", admin_winner_submit_path(winner), method: :put if winner.may_submit? %>
-          <%= button_to "Pay", admin_winner_pay_path(winner), method: :put if winner.may_pay? %>
-          <%= button_to "Ship", admin_winner_ship_path(winner), method: :put if winner.may_ship? %>
-          <%= button_to "Deliver", admin_winner_deliver_path(winner), method: :put if winner.may_deliver? %>
-          <%= button_to "Publish", admin_winner_publish_path(winner), method: :put if winner.may_publish? %>
-          <%= button_to "Remove Publish", admin_winner_remove_publish_path(winner), method: :put if winner.may_publish? %>
+          <%= button_to "Submit", admin_winner_submit_path(winner), class: "btn btn-sm btn-outline-success", method: :put if winner.may_submit? %>
+          <%= button_to "Pay", admin_winner_pay_path(winner), class: "btn btn-sm btn-outline-success", method: :put if winner.may_pay? %>
+          <%= button_to "Ship", admin_winner_ship_path(winner), class: "btn btn-sm btn-outline-warning", method: :put if winner.may_ship? %>
+          <%= button_to "Deliver", admin_winner_deliver_path(winner), class: "btn btn-sm btn-outline-warning", method: :put if winner.may_deliver? %>
+          <%= button_to "Publish", admin_winner_publish_path(winner), class: "btn btn-sm btn-outline-info", method: :put if winner.may_publish? %>
+          <%= button_to "Remove Publish", admin_winner_remove_publish_path(winner), class: "btn btn-sm btn-outline-danger", method: :put if winner.may_publish? %>
         </td>
     <% end %>
     </tr>

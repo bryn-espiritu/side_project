@@ -1,0 +1,88 @@
+<div class="card w-100 bg-light my-2">
+  <div class="card-body">
+    <%= form_tag({ url: admin_bets_path }, { method: :get }) do %>
+      <div class="row text-lg-start">
+        <div class="col-6">
+          <%= label_tag :serial_number %>
+          <%= text_field_tag :serial_number, '', class: "form-control" %>
+        </div>
+        <div class="col-6">
+          <%= label_tag :name, 'Item Name' %>
+          <%= text_field_tag :item.name, '', class: "form-control" %>
+        </div>
+        <div class="col-6">
+          <%= label_tag :email %>
+          <%= text_field_tag :email, '', class: "form-control" %>
+        </div>
+        <div class="col-6">
+          <%= label_tag :state %>
+          <%= select_tag :state, options_for_select(Order.aasm.states.map(&:name)), { prompt: 'Choose State', class: "form-control form-select text-center" } %>
+        </div>
+
+        <div class="col-6">
+          <%= label_tag :genre %>
+          <%= select_tag :genre, options_for_select(Order.genres.keys.map { |genre| [genre.humanize, genre] }, params[:status]), { prompt: 'Select Genre', class: "form-control form-select text-center text-primary" } %>
+        </div>
+
+        <div class="col-6">
+          <%= label_tag :offer %>
+          <%= select_tag :offer, options_for_select(Offer.all.map { |offer| [offer.name, offer.id] }, params[:offer]), { prompt: 'Select Offer', class: "form-control form-select text-center text-primary" } %>
+        </div>
+      </div>
+      </div>
+      <div class="input-group my-3">
+        <span class="input-group-text">Date</span>
+        <%= datetime_field_tag :created_at, '', class: "form-control", value: params[:created_at] %>
+        <%= datetime_field_tag :ended_at, '', class: "form-control", value: params[:ended_at] %>
+      </div>
+      <div class="row p-3">
+        <div class="col">
+          <%= submit_tag :Search, class: "btn btn-outline-primary mt-2 w-100" %>
+        </div>
+        <div class="col">
+          <%= link_to 'Reset', admin_orders_path, class: "btn btn-outline-danger mt-2 w-100" %>
+        </div>
+      </div>
+    <% end %>
+    </div>
+
+<div class="alert alert-info">
+  <h4>Total Amount <%= @total_amount %></h4>
+  <h5>Subtotal Amount:<%= @sub_total_amount %></h5>
+  <h4>total Coin: <%= @total_coin %></h4>
+  <h5>Subtotal Coin: <%= @sub_total_coin %></h5>
+</div>
+
+<table class="table text-center">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Serial Number</th>
+    <th>User</th>
+    <th>State</th>
+    <th>Amounts</th>
+    <th>Coins</th>
+    <th>Genre</th>
+    <th>Date</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @orders.each do |order| %>
+    <tr>
+      <td><%= order.id %></td>
+      <td><%= order.serial_number %></td>
+      <td><%= order.user.email %></td>
+      <td><%= order.state %></td>
+      <td><%= order.amount %></td>
+      <td><%= order.coin %></td>
+      <td><%= order.genre %></td>
+      <td><%= order.created_at %></td>
+      <td>
+        <%= button_to 'Pay', admin_order_pay_path(order.id), method: :put, class: 'btn btn-outline-warning btn-sm' if order.may_pay? %>
+        <%= button_to 'Cancel', admin_order_cancel_path(order), method: :put, class: 'btn btn-outline-danger btn-sm' if order.may_cancel? %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

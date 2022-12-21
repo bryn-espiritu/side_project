@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'orders/index'
+  end
   # get 'home/new'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Defines the root path route ("/")
@@ -8,6 +11,9 @@ Rails.application.routes.draw do
       devise_for :users, controllers: { sessions: 'admins/sessions' }
       resources :users
       resources :offers
+      resources :orders do
+        put :pay, :cancel
+      end
       resources :items do
         put :start, :pause, :cancel, :end
       end

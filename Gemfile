@@ -42,6 +42,8 @@ gem "rqrcode", "~> 2.0"
 
 gem "aasm"
 
+gem "kaminari"
+
 gem 'active_model_serializers', '~> 0.10.0'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

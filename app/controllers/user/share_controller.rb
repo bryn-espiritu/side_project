@@ -1,7 +1,10 @@
 class User::ShareController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_winner
+  before_action :set_winner, except: :index
 
+  def index
+    @winners = Winner.includes(:item, :user).published
+  end
   
   def edit;
   end

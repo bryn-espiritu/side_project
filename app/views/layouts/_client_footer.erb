@@ -1,6 +1,6 @@
 <div class="mt-2 bg-light d-flex justify-content-center">
   <section class="py-3">
-    <a class="mx-5" href="#" style="color: black; text-decoration: none">SHARE</a>
+    <%= link_to "SHARE", user_share_index_path, class: "mx-5", style: "color: black; text-decoration: none"%>
     <%= link_to "INVITE", user_invites_path, class: "mx-5", style: "color: black; text-decoration: none" if user_signed_in? %>
     <%= link_to "LOTTERY", user_lotteries_path, class: "mx-5", style: "color: black; text-decoration: none" %>
     <%= link_to "SHOP", user_shop_index_path, class: "mx-5", style: "color: black; text-decoration: none" %>

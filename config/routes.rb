@@ -39,6 +39,9 @@ Rails.application.routes.draw do
       resources :winners do
         put :claim
       end
+      resources :share do
+        put :share
+      end
     end
     resources :home
   end

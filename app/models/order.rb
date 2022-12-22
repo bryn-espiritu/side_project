@@ -3,6 +3,8 @@ class Order < ApplicationRecord
   belongs_to :offer
   after_create :generate_serial_number
   enum genre: { deposit: 0, increase: 1, deduct: 2, bonus: 3, share: 4 }
+
+
   include AASM
   aasm column: :state do
     state :pending, initial: true

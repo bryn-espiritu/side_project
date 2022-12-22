@@ -7,11 +7,6 @@ class User::UserProfilesController < ApplicationController
     @winners = Winner.where(user: @user).page(params[:page]) if params[:winner] == "winners"
   end
 
-  def update
-    if @winner.update(winner_params)
-    end
-  end
-
   private
 
   def winner_params

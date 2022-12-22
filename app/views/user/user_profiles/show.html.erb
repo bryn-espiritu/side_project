@@ -78,26 +78,19 @@
   <% end %>
 </span>
 
-  <span>
+  <span class="d-flex justify-content-center">
   <% @winners&.each do |winner| %>
-    <div class="card mt-3">
-      <h5 class="card-header alert alert-warning">Serial Number: <%= winner.bet.serial_number %></h5>
-      <div class="card-body">
-        <h5 class="card-title">Date: <%= winner.created_at %></h5>
-        <div class="container px-4 text-center">
-          <div class="row gx-5">
-            <div class="col">
-              <div class="p-3">Title: <%= winner.item.name %></div>
-            </div>
-            <div class="col">
-              <div class="p-3">Status: <%= winner.state %></div>
-            </div>
-          </div>
-          <%= link_to "Process Claim", edit_user_winner_path(winner), class: "btn btn-outline-success" if winner.may_claim? %>
-          <%= link_to "Share", edit_user_winner_path(winner), class: "btn btn-outline-success" if winner.may_claim? %>
-        </div>
-      </div>
-    </div>
+      <div class="card m-2" style="width: 50rem;">
+  <%= image_tag winner.picture.url, class: "card-image-top" if winner.picture? %>
+  <div class="card-body">
+    <h5 class="card-title">Serial Number: <%= winner.bet.serial_number %></h5>
+    <p class="card-text my-0">Item: <%= winner.item.name %></p>
+    <p class="card-text my-0">State: <%= winner.state %></p>
+    <p class="card-text">Date: <%= winner.created_at %></p>
+    <%= link_to "Process Claim", edit_user_winner_path(winner), class: "btn btn-outline-success" if winner.may_claim? %>
+    <%= link_to "Share", edit_user_share_path(winner), class: "btn btn-outline-success" if winner.may_share? %>
+  </div>
+</div>
   <% end %>
 </span>
 

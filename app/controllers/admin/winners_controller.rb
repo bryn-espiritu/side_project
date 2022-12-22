@@ -1,4 +1,6 @@
 class Admin::WinnersController < AdminController
+  before_action :set_winner, except: :index
+
   def index
     @winners = Winner.includes(:user, :item, :bet, :address)
     @winners = @winners.where(bet: { serial_number: params[:serial_number] }) if params[:serial_number].present?
@@ -10,7 +12,8 @@ class Admin::WinnersController < AdminController
   end
 
   def submit
-    if @winner.submit!
+    if @winner.may_submit?
+    @winner.submit!
       flash[:notice] = "Successfully Submitted!"
     else
       flash[:alert] = @winner.errors.full_messages.join(', ')
@@ -19,7 +22,8 @@ class Admin::WinnersController < AdminController
   end
 
   def pay
-    if @winner.pay!
+    if @winner.may_pay?
+    @winner.pay!
       flash[:notice] = "Successfully Paid!"
     else
       flash[:alert] = @winner.errors.full_messages.join(', ')
@@ -28,7 +32,8 @@ class Admin::WinnersController < AdminController
   end
 
   def ship
-    if @winner.ship!
+    if @winner.may_ship?
+    @winner.ship!
       flash[:notice] = "Successfully Shipped!"
     else
       flash[:alert] = @winner.errors.full_messages.join(', ')
@@ -37,7 +42,8 @@ class Admin::WinnersController < AdminController
   end
 
   def deliver
-    if @winner.deliver!
+    if @winner.may_deliver?
+    @winner.deliver!
       flash[:notice] = "Successfully Delivered!"
     else
       flash[:alert] = @winner.errors.full_messages.join(', ')
@@ -46,7 +52,8 @@ class Admin::WinnersController < AdminController
   end
 
   def publish
-    if @winner.publish!
+    if @winner.may_publish?
+    @winner.publish!
       flash[:notice] = "Successfully Published!"
     else
       flash[:alert] = @winner.errors.full_messages.join(', ')
@@ -55,7 +62,8 @@ class Admin::WinnersController < AdminController
   end
 
   def remove_publish
-    if @winner.remove_publish!
+    if @winner.may_remove_publish?
+    @winner.remove_publish!
       flash[:notice] = "Successfully Remove Published!"
     else
       flash[:alert] = @winner.errors.full_messages.join(', ')
@@ -66,6 +74,6 @@ class Admin::WinnersController < AdminController
   private
 
   def set_winner
-    @winner = Winner.find params[:winner_id]
+    @winner = Winner.find(params[:id] || params[:winner_id])
   end
 end

@@ -30,8 +30,8 @@
 
 <div class="d-flex my-3 justify-content-center ">
   <%= link_to "Lottery History", user_user_profile_path(bet: :bets), class: "btn btn-outline-info mx-2" %>
-  <%= link_to "Order History", user_user_profile_path(order: :orders), class: "btn btn-outline-info mx-2" %>
-  <%= link_to "Winner History", user_user_profile_path(winner: :winners), class: "btn btn-outline-info mx-2" %>
+  <%= link_to "Order History", user_user_profile_path(order: :orders), class: "btn btn-outline-success mx-2" %>
+  <%= link_to "Winner History", user_user_profile_path(winner: :winners), class: "btn btn-outline-warning mx-2" %>
 </div>
 
 <div class="container">
@@ -78,19 +78,27 @@
   <% end %>
 </span>
 
-  <span class="d-flex justify-content-center">
+  <span>
   <% @winners&.each do |winner| %>
-      <div class="card m-2" style="width: 50rem;">
-  <%= image_tag winner.picture.url, class: "card-image-top" if winner.picture? %>
-  <div class="card-body">
-    <h5 class="card-title">Serial Number: <%= winner.bet.serial_number %></h5>
-    <p class="card-text my-0">Item: <%= winner.item.name %></p>
-    <p class="card-text my-0">State: <%= winner.state %></p>
-    <p class="card-text">Date: <%= winner.created_at %></p>
-    <%= link_to "Process Claim", edit_user_winner_path(winner), class: "btn btn-outline-success" if winner.may_claim? %>
-    <%= link_to "Share", edit_user_share_path(winner), class: "btn btn-outline-success" if winner.may_share? %>
+      <div class="card my-2">
+      <h4 class="card-header alert alert-warning">Serial Number: <%= winner.bet.serial_number %></h4>
+      <div class="card-body">
+        <h6 class="card-title">Date: <%= winner.created_at %></h6>
+        <div class="container px-4 text-center">
+          <div class="p-3 my-3 row gx-5">
+            <div class="col">
+              State: <%= winner.state %>
+            </div>
+            <div class="col">
+              Item: <%= winner.item.name %>
+            </div>
+          </div>
+          <%= link_to "Process Claim", edit_user_winner_path(winner), class: "w-100 btn btn-outline-primary" if winner.may_claim? %>
+          <%= link_to "Share", edit_user_share_path(winner), class: "w-100 btn btn-primary" if winner.may_share? %>
+        </div>
+      </div>
+
   </div>
-</div>
   <% end %>
 </span>
 

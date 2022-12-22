@@ -36,6 +36,9 @@ Rails.application.routes.draw do
       resource :user_profile
       resources :lotteries
       resources :shop
+      resources :orders do
+        put :cancel
+      end
       resources :winners do
         put :claim
       end

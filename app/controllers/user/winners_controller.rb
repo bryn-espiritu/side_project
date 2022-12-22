@@ -12,7 +12,6 @@ class User::WinnersController < ApplicationController
       flash[:alert] = @winner.errors.full_messages.join(', ')
       redirect_to user_user_profile_path
     end
-    # render json: params
   end
 
   private

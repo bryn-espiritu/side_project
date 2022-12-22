@@ -72,6 +72,7 @@
               <div class="p-3">Amount: <%= order.amount %></div>
             </div>
           </div>
+          <%= button_to "Cancel", user_order_cancel_path(order), method: :put, class: "btn btn-outline-danger" if order.may_cancel? %>
         </div>
       </div>
   </div>

@@ -22,9 +22,9 @@
       <td><%= user.email %></td>
       <td><%= user.children_members %></td>
       <td><%= user.coins %></td>
-      <td></td>
+      <td><%= user.bets.count %></td>
       <td><%= user.total_deposit %></td>
-      <td></td>
+      <td><%= user.children.pluck(:total_deposit).sum  %></td>
       <td><%= user.phone %></td>
       <td><%= link_to "Balance Operate", admin_user_new_path(user, :increase), class: "btn btn-outline-primary" %></td>
 

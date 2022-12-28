@@ -1,0 +1,49 @@
+<h1>Invite List</h1>
+
+<div class="card-body">
+  <%= form_tag({ url: admin_invites_path }, { method: :get }) do %>
+    <div class="container mb-5">
+      <div class="form-control">
+        <label for="parent" class="h5">Parent</label>
+        <%= text_field_tag :parent, '', class: "form-control" %>
+        <%= submit_tag :Search, class: "btn btn-sm btn-outline-primary mt-2 w-25" %>
+      </div>
+
+  <% end %>
+  </div>
+</div>
+
+
+<table class="table text-center">
+  <thead class="">
+  <tr>
+    <td>Parent Email</td>
+    <td>Email</td>
+    <td>Total Deposit</td>
+    <td>Member's Total Deposit</td>
+    <td>Coins</td>
+    <td>Date created</td>
+    <td>Used Coins</td>
+    <td>Child Members</td>
+  </tr>
+  </thead>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.parent&.email %></td>
+      <td><%= user.email %></td>
+      <td><%= user.total_deposit %></td>
+      <td><%= user.children.pluck(:total_deposit).sum %></td>
+      <td><%= user.coins %></td>
+      <td><%= user.created_at %></td>
+      <td><%= user.bets.count %></td>
+      <td><%= user.children_members %></td>
+    </tr>
+  <% end %>
+</table>
+
+
+
+
+
+
+

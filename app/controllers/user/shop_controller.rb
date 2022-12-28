@@ -8,7 +8,7 @@ class User::ShopController < ApplicationController
 
   def create
     @order = Order.new
-    @offer = Offer.active.find(params[:id])
+    @offer = Offer.find(params[:id])
     @order.offer = @offer
     @order.amount = @offer.amount
     @order.coin = @offer.coin
@@ -18,9 +18,7 @@ class User::ShopController < ApplicationController
     if @order.save
       redirect_to user_shop_index_path, notice: "Order has been Successfully Submitted "
     else
-      render :index
+      redirect_to user_shop_index_path, notice: @order.errors
     end
-
-
   end
 end

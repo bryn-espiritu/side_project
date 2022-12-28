@@ -3,7 +3,7 @@ class Order < ApplicationRecord
   belongs_to :offer, optional: true
   after_create :generate_serial_number
 
-  validates_presence_of :remarks
+  validates_presence_of :remarks, unless: :deposit?
   validates_numericality_of :coin
   enum genre: { deposit: 0, increase: 1, deduct: 2, bonus: 3, share: 4 }
 
@@ -62,7 +62,7 @@ class Order < ApplicationRecord
   end
 
   def enough_coins?
-    user.coins >= coin
+    user.coins => coin
   end
 
   def not_deduct?

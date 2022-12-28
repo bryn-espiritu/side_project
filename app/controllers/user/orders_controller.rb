@@ -6,7 +6,6 @@ class User::OrdersController < ApplicationController
 
   end
 
-
   def cancel
     if @order.cancel!
       flash[:notice] = "Successfully Cancelled!"

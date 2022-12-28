@@ -1,9 +1,11 @@
 class Order < ApplicationRecord
   belongs_to :user
-  belongs_to :offer
+  belongs_to :offer, optional: true
   after_create :generate_serial_number
-  enum genre: { deposit: 0, increase: 1, deduct: 2, bonus: 3, share: 4 }
 
+  validates_presence_of :remarks
+  validates_numericality_of :coin
+  enum genre: { deposit: 0, increase: 1, deduct: 2, bonus: 3, share: 4 }
 
   include AASM
   aasm column: :state do

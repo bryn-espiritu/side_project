@@ -1,0 +1,49 @@
+
+<div class="">
+  <div class="row gx-5">
+    <div class="col">
+      <div class="p-3 border bg-light">
+        <div class="d-flex justify-content-center mb-3">
+          <%= link_to "Increase", admin_user_new_path(@user, :increase), class: "btn btn-outline-success mx-2" %>
+          <%= link_to "Deduct", admin_user_new_path(@user, :deduct), class: "btn btn-outline-success mx-2" %>
+          <%= link_to "Bonus", admin_user_new_path(@user, :bonus), class: "btn btn-outline-success mx-2" %>
+        </div>
+        <div>
+          <%= form_with model: @order, url: admin_user_create_path, method: :post do |f| %>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Coin</span>
+            <%= f.text_field :coin, class: "form-control" %>
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Remarks</span>
+            <%= f.text_field :remarks, class: "form-control" %>
+          </div>
+
+            <%= f.submit  %>
+            <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="p-3 border bg-light">
+        <div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Username</span>
+            <input type="text" class="form-control" readonly="true" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="<%= @user.username %>">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Promoter Name</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="<%= @user.parent&.username %>">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Coins</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" readonly="true" value="<%= @user.coins %>">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

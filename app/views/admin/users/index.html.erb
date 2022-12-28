@@ -12,6 +12,7 @@
     <th>Total Deposit</th>
     <th>Member Total Deposit</th>
     <th>Phone Number</th>
+    <th>Action</th>
   </tr>
   </thead>
   <% @users.each do |user| %>
@@ -25,6 +26,7 @@
       <td><%= user.total_deposit %></td>
       <td></td>
       <td><%= user.phone %></td>
+      <td><%= link_to "Balance Operate", admin_user_new_path(user, :increase), class: "btn btn-outline-primary" %></td>
 
 
     </tr>

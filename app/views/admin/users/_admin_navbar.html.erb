@@ -10,15 +10,18 @@
         <a href="#" class="dropdown-item">Chinese</a>
       </div>
     </li>
+   <li>
+     <%= button_to "Log Out", destroy_admin_user_session_path, { onclick: "return confirm('Are you sure you want to delete?')", method: :delete, class: "dropdown-item" } if admin_user_signed_in? %>
+   </li>
     <li class="nav-item dropdown ms-auto">
       <a href="#" class="m-1 p-3 navbar-toggler-icon border border-2 border-dark" style="color: black; appearance: none;" data-bs-toggle="dropdown"></a>
       <div class="dropdown-menu dropdown-menu-end">
         <a href="#" class="dropdown-item">Settings</a>
         <div class="dropdown-divider"></div>
-        <% if user_signed_in? %>
-          <%= button_to "Log Out", destroy_user_session_path, { onclick: "return confirm('Are you sure you want to delete?')", method: :delete, class: "dropdown-item" } %>
+        <% if admin_user_signed_in? %>
+
         <% else %>
-          <%= link_to "Login", new_user_session_path, class: "dropdown-item" %>
+          <%= link_to "Login", new_admin_user_session_path, class: "dropdown-item" %>
         <% end %>
       </div>
     </li>

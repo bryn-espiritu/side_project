@@ -9,8 +9,12 @@ Rails.application.routes.draw do
     namespace :admin, path: '' do
       root "users#index"
       devise_for :users, controllers: { sessions: 'admins/sessions' }
-      resources :users
+      resources :users, path: 'users/clients/' do
+        get "/order/:genre/new", as: "new", to: "users#new"
+        post "/order/:genre/", as: "create", to: "users#create"
+      end
       resources :offers
+      resources :invites
       resources :orders do
         put :pay, :cancel
       end
@@ -26,7 +30,6 @@ Rails.application.routes.draw do
       end
     end
   end
-
   constraints(ClientDomainConstraint.new) do
     devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
     root "home#index"

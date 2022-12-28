@@ -14,7 +14,6 @@ class Admin::OrdersController < AdminController
     @total_coin = Order.sum(:coin)
     @sub_total_amount = @orders.sum(:amount)
     @sub_total_coin = @orders.sum(:coin)
-
   end
 
   def pay

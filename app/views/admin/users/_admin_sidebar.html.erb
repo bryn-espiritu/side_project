@@ -7,9 +7,7 @@
         </a>
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
           <li class="nav-item">
-            <a href="#" class="nav-link align-middle px-0">
-              <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Homepage</span>
-            </a>
+              <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline"></span>
           </li>
           <li>
             <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
@@ -53,6 +51,9 @@
               </li>
               <li class="my-1">
                 <%= link_to "Order List", admin_orders_path, style: "text-decoration: none" %>
+              </li>
+              <li class="my-1">
+                <%= link_to "Invite List", admin_invites_path, style: "text-decoration: none" %>
               </li>
             </ul>
           </li>

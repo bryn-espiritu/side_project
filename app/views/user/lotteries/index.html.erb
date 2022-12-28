@@ -1,30 +1,29 @@
 <div class="container">
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-      <div>
-        <div class="carousel-item  active">
-          <img src="https://images.unsplash.com/photo-1518688248740-7c31f1a945c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="d-block w-100" style="height: 500px;" alt="Lotto">
+      <% @banners.each do |banner| %>
+        <div class="carousel-item active">
+          <%= image_tag "#{banner.preview.url}", class: "d-block w-100", style: "height: 500px;" %>
         </div>
-        <div class="carousel-item ">
-          <img src="https://images.unsplash.com/photo-1504460362810-61ec3eaee927?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="d-block w-100" style="height: 500px;" alt="Lotto_ko">
-        </div>
-        <div class="carousel-item ">
-          <img src="https://images.unsplash.com/photo-1518895312237-a9e23508077d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1184&q=80" class="d-block w-100" style="height: 500px;" alt="lottohan_mo_ko">
-        </div>
-      </div>
+      <% end %>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
   </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 </div>
 <div class="alert alert-info">
-  <marquee class="h4 p-0">Announcement:</marquee>
+  <marquee class="h4 p-0">Announcement:
+    <% @news_tickers.each do |news| %>
+      <%= news.content %>
+    <% end %>
+  </marquee>
 </div>
 
 <button class="container btn btn-success my-2 w-100 d-flex justify-content-center">Cash in!</button>
@@ -36,19 +35,19 @@
 </div>
 <div class="d-flex justify-content-lg-start">
   <div class="container mt-5">
-      <div class="row">
-        <% @items.each do |item| %>
-          <div class="col-lg-6 my-3">
-            <div class="card d-flex justify-content-center alert alert-warning" style="width: 100%;">
-              <%= link_to (image_tag item.image.url, style: 'height:450px; width: 100%' if item.image?), user_lottery_path(item)  %>
-              <div class="card-body ">
-                <h4 class="card-title">Welcome to <%= item.name %></h4>
-                <h6>Chances to win:  <%= item.categories.pluck(:name).join(', ') %></h6>
-              </div>
+    <div class="row">
+      <% @items.each do |item| %>
+        <div class="col-lg-6 my-3">
+          <div class="card d-flex justify-content-center alert alert-warning" style="width: 100%;">
+            <%= link_to (image_tag item.image.url, style: 'height:450px; width: 100%' if item.image?), user_lottery_path(item) %>
+            <div class="card-body ">
+              <h4 class="card-title">Welcome to <%= item.name %></h4>
+              <h6>Chances to win:  <%= item.categories.pluck(:name).join(', ') %></h6>
             </div>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
+  </div>
 </div>
 

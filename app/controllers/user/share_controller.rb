@@ -3,6 +3,8 @@ class User::ShareController < ApplicationController
   before_action :set_winner, except: :index
 
   def index
+    @news_tickers = NewsTicker.active
+    @banners = Banner.active
     @winners = Winner.includes(:item, :user).published
   end
   

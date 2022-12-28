@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'orders/index'
-  end
   # get 'home/new'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Defines the root path route ("/")
@@ -15,6 +12,8 @@ Rails.application.routes.draw do
       end
       resources :offers
       resources :invites
+      resources :news_tickers
+      resources :banners
       resources :orders do
         put :pay, :cancel
       end

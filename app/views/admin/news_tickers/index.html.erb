@@ -1,0 +1,25 @@
+<h1>NewsTicker <span><%= link_to "New", new_admin_news_ticker_path %></span></h1>
+
+<table class="table table-striped text-center">
+  <thead>
+  <tr class="bg-dark text-white">
+    <th>ID</th>
+    <th>Content</th>
+    <th>Status</th>
+    <th>Admin Name</th>
+    <th>Action</th>
+  </tr>
+  <% @news_tickers.each do |news| %>
+    <tr>
+      <td><%= news.id %></td>
+      <td><%= news.content %></td>
+      <td><%= news.status %></td>
+      <td><%= news.admin %></td>
+      <td>
+        <%= link_to "Edit", edit_admin_news_ticker_path(news), class: "btn btn-outline-warning" %>
+        <%= button_to "Delete", admin_news_ticker_path(news), method: :delete, class: "btn btn-outline-danger" %>
+      </td>
+    </tr>
+  <% end %>
+  </thead>
+</table>

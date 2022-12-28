@@ -2,6 +2,8 @@ class User::ShopController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @news_tickers = NewsTicker.active
+    @banners = Banner.active
     @offers = Offer.active
     @offer = Offer.new
   end

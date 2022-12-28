@@ -2,6 +2,8 @@ class User::LotteriesController < ApplicationController
   before_action :set_item, only: [:show]
 
   def index
+    @news_tickers = NewsTicker.active
+    @banners = Banner.active
     @items = Item.starting.active
     @items = @items.includes(:categories).where(categories: { name: params[:categories] }) if params[:categories]
     @categories = Category.all

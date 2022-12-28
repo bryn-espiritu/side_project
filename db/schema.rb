@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_23_022303) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_28_094835) do
   create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
     t.integer "genre", default: 0
     t.string "name"
@@ -30,6 +30,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_022303) do
     t.index ["province_id"], name: "index_addresses_on_province_id"
     t.index ["region_id"], name: "index_addresses_on_region_id"
     t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "banners", charset: "utf8mb4", force: :cascade do |t|
+    t.string "preview"
+    t.datetime "online_at"
+    t.datetime "offline_at"
+    t.integer "status", default: 0
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "barangays", charset: "utf8mb4", force: :cascade do |t|
@@ -100,6 +110,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_022303) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.integer "batch_count", default: 0
+  end
+
+  create_table "news_tickers", charset: "utf8mb4", force: :cascade do |t|
+    t.string "content"
+    t.integer "status", default: 0
+    t.bigint "admin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["admin_id"], name: "index_news_tickers_on_admin_id"
   end
 
   create_table "offers", charset: "utf8mb4", force: :cascade do |t|

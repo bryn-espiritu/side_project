@@ -1,0 +1,27 @@
+<h1>Banner <span><%= link_to "New", new_admin_banner_path %></span></h1>
+
+<table class="table table-striped text-center">
+  <thead>
+  <tr class="bg-dark text-white">
+    <th>ID</th>
+    <th>Image</th>
+    <th>Status</th>
+    <th>Online </th>
+    <th>Offline</th>
+    <th>Action</th>
+  </tr>
+  <% @banners.each do |banner| %>
+    <tr>
+      <td><%= banner.id %></td>
+      <td><%= image_tag "#{banner.preview.url}", style: 'height:50px' %></td>
+      <td><%= banner.status %></td>
+      <td><%= banner.online_at %></td>
+      <td><%= banner.offline_at %></td>
+      <td>
+        <%= link_to "Edit", edit_admin_banner_path(banner), class: "btn btn-outline-warning" %>
+        <%= button_to "Delete", admin_banner_path(banner), method: :delete, class: "btn btn-outline-danger" %>
+      </td>
+    </tr>
+  <% end %>
+  </thead>
+</table>

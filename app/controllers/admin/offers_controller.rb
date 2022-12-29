@@ -1,5 +1,6 @@
 class Admin::OffersController < AdminController
   before_action :set_offer, only: [:edit, :update, :destroy]
+
   def index
     @offers = Offer.includes(:orders).all
     @offers = @offers.where(genre: params[:genre]) if params[:genre].present?
@@ -17,14 +18,13 @@ class Admin::OffersController < AdminController
     end
   end
 
-  def edit;
-  end
+  def edit; end
 
   def update
     if @offer.update(offer_params)
       redirect_to admin_offers_path
     else
-    render :edit
+      render :edit
     end
   end
 

@@ -18,7 +18,6 @@ class Admin::ItemsController < AdminController
     end
   end
 
-
   def edit; end
 
   def update
@@ -65,10 +64,11 @@ class Admin::ItemsController < AdminController
   def end
     if @item.end!
       flash[:notice] = "Successfully Ended"
-  else
-    flash[:alert] = @item.errors.full_messages.join(', ')
+    else
+      flash[:alert] = @item.errors.full_messages.join(', ')
     end
   end
+
   private
 
   def item_params

@@ -13,7 +13,7 @@ class Admin::WinnersController < AdminController
 
   def submit
     if @winner.may_submit?
-    @winner.submit!
+      @winner.submit!
       flash[:notice] = "Successfully Submitted!"
     else
       flash[:alert] = @winner.errors.full_messages.join(', ')
@@ -23,7 +23,7 @@ class Admin::WinnersController < AdminController
 
   def pay
     if @winner.may_pay?
-    @winner.pay!
+      @winner.pay!
       flash[:notice] = "Successfully Paid!"
     else
       flash[:alert] = @winner.errors.full_messages.join(', ')
@@ -33,7 +33,7 @@ class Admin::WinnersController < AdminController
 
   def ship
     if @winner.may_ship?
-    @winner.ship!
+      @winner.ship!
       flash[:notice] = "Successfully Shipped!"
     else
       flash[:alert] = @winner.errors.full_messages.join(', ')
@@ -43,7 +43,7 @@ class Admin::WinnersController < AdminController
 
   def deliver
     if @winner.may_deliver?
-    @winner.deliver!
+      @winner.deliver!
       flash[:notice] = "Successfully Delivered!"
     else
       flash[:alert] = @winner.errors.full_messages.join(', ')
@@ -53,7 +53,7 @@ class Admin::WinnersController < AdminController
 
   def publish
     if @winner.may_publish?
-    @winner.publish!
+      @winner.publish!
       flash[:notice] = "Successfully Published!"
     else
       flash[:alert] = @winner.errors.full_messages.join(', ')
@@ -63,7 +63,7 @@ class Admin::WinnersController < AdminController
 
   def remove_publish
     if @winner.may_remove_publish?
-    @winner.remove_publish!
+      @winner.remove_publish!
       flash[:notice] = "Successfully Remove Published!"
     else
       flash[:alert] = @winner.errors.full_messages.join(', ')

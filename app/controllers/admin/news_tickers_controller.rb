@@ -18,8 +18,7 @@ class Admin::NewsTickersController < AdminController
     end
   end
 
-  def edit;
-  end
+  def edit; end
 
   def update
     if @news_ticker.update(news_ticker_params)

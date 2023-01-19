@@ -21,3 +21,4 @@ class User::OrdersController < ApplicationController
     @order = Order.find(params[:order_id])
   end
 end
+

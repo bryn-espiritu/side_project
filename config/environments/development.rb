@@ -69,4 +69,6 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
   config.hosts << "client.com"
   config.hosts << "admin.com"
+  config.hosts << "1eba-175-176-37-136.ap.ngrok.io"
+  # config.hosts.clear
 end

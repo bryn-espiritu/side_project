@@ -1,7 +1,11 @@
-<h2>Log in</h2>
-<%= render "layouts/notification_messages" %>
+<h2 class="text-center my-5">Log in</h2>
 
-<div class="container form-control w-25">
+<div class="btn-group mb-5" style="padding: 15px 40px 15px 40px" role="group" aria-label="Basic example">
+  <%= link_to "Login", new_user_session_path, class: "btn btn-outline-warning active" %>
+  <%= link_to "Register", new_user_registration_path, class: "btn btn-outline-warning" %>
+</div>
+
+<div class="container form-control mt-5 w-25">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />

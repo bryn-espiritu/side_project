@@ -1,9 +1,14 @@
 <h2 class="text-center my-5">Sign up</h2>
 
+<div class="btn-group" style="padding: 15px 40px 15px 40px" role="group" aria-label="Basic example">
+  <%= link_to "Login", new_user_session_path, class: "btn btn-outline-warning" %>
+  <%= link_to "Register", new_user_registration_path, class: "btn btn-outline-warning active" %>
+</div>
+
 <div class="container my-5 w-50">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }) do |f| %>
     <%= render "users/shared/error_messages", resource: resource %>
-    <div class="form-control bg-light">
+      <div class="form-control bg-light">
       <div class="container w-50">
         <div class="field text-center">
           <% if cookies[:promoter] %>
@@ -11,10 +16,10 @@
             <p>this is proof that you have been invited by this user</p>
             <div>
               <%= f.email_field :parent, autofocus: true, autocomplete: "email", class: "form-control text-center",
-                                style: "outline: none;" ,value: cookies[:promoter], readonly: true %>
+                                style: "outline: none;", value: cookies[:promoter], readonly: true %>
             </div>
           <% end %>
-        </div>
+      </div>
       </div>
 
       <div class="field my-2">
@@ -39,6 +44,5 @@
         <%= f.submit "Sign up", class: "btn btn-outline-success w-25" %>
       </div>
   <% end %>
-  </div>
-  <%= render "users/shared/links" %>
-</div>
+    </div>
+    </div>

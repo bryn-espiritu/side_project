@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
-  end
-
-  def new
+    @banners = Banner.active
+    @news_tickers = NewsTicker.active
+    @winners = Winner.includes(:item, :user).published
   end
 end

@@ -38,6 +38,6 @@ class Admin::OrdersController < AdminController
   private
 
   def set_event
-    @order = Order.find(params[:order_id])
+    @order = Order.find(params[:order_id] || params[:id])
   end
 end

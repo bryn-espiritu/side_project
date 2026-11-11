@@ -7,17 +7,16 @@ class User::AddressesController < ApplicationController
   end
 
   def new
-    @address = Address.new
+    @address = current_user.addresses.build
   end
 
   def create
-    @address = Address.new(address_params)
-    @address.user = current_user
+    @address = current_user.addresses.build(address_params)
     if @address.save
       redirect_to user_addresses_path, notice: "Address is Successfully Submitted"
     else
-      flash[:alert] = @address.errors.full_messages.join(', ')
-      render :new
+      flash.now[:alert] = @address.errors.full_messages.join(', ')
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -25,13 +24,18 @@ class User::AddressesController < ApplicationController
 
   def update
     if @address.update(address_params)
-      redirect_to user_addresses_path
+      redirect_to user_addresses_path, notice: "Address successfully updated"
+    else
+      flash.now[:alert] = @address.errors.full_messages.join(', ')
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     if @address.destroy
       redirect_to user_addresses_path, notice: "Address successfully deleted"
+    else
+      redirect_to user_addresses_path, alert: @address.errors.full_messages.join(', ')
     end
   end
 
@@ -43,7 +47,6 @@ class User::AddressesController < ApplicationController
   end
 
   def set_address
-    @address = Address.find(params[:id] || params[:address_id])
+    @address = current_user.addresses.find(params[:id] || params[:address_id])
   end
-
 end

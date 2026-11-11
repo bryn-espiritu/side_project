@@ -2,8 +2,10 @@ class Bet < ApplicationRecord
   belongs_to :user
   belongs_to :item
   has_many :winners
+
+  validates :coin, numericality: { only_integer: true, greater_than: 0 }
+  validate :enough_coins?, on: :create
   after_create :generate_serial_number, :deducted
-  after_validation :enough_coins?
 
   include AASM
   aasm column: :state do
@@ -24,23 +26,22 @@ class Bet < ApplicationRecord
   end
 
   def generate_serial_number
-    number_count = Bet.where(item_id: item.id, batch_count: item.batch_count).count.to_s.rjust(4, '0')
-    self.update(serial_number: "#{Time.current.strftime("%y%m%d")}-#{item.id}-#{item.batch_count}-#{number_count}")
+    update!(serial_number: "#{Time.current.strftime('%y%m%d')}-#{item_id}-#{batch_count}-#{id}")
   end
 
   def refund
-    self.user.update!(coins: self.user.coins + coin)
+    user.with_lock { user.update!(coins: user.coins + coin) }
   end
 
   def deducted
-    self.user.update!(coins: self.user.coins - coin)
-  end
-
-  def enough_coins?
-    if self.user.coins < 1
-      errors.add(:base, "Not Enough Coins")
+    user.with_lock do
+      raise ActiveRecord::RecordInvalid, self if user.coins < coin
+      user.update!(coins: user.coins - coin)
     end
   end
 
+  def enough_coins?
+    return if user.nil? || coin.nil? || coin <= 0
+    errors.add(:base, "Not Enough Coins") if user.coins < coin
+  end
 end
-

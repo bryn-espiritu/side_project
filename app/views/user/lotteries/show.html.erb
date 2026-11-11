@@ -10,8 +10,8 @@
   </div>
 </div>
 <div class="d-flex justify-content-center text-center">
-  <%= form_with model: @bets, url: user_lotteries_path, method: :post do |f| %>
-    <%= f.text_field :coin, class: "form-control my-2", style: "width: 450px;" %>
+  <%= form_with model: @bet, url: user_lotteries_path, method: :post do |f| %>
+    <%= f.number_field :coin, min: 1, max: 100, required: true, class: "form-control my-2", style: "width: 450px;" %>
     <%= hidden_field_tag :item_id, @item.id %>
     <%= f.submit "Submit", class: "btn btn-outline-warning w-50" %>
   <% end %>

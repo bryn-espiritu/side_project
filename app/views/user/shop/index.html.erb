@@ -1,13 +1,11 @@
 <div class="container">
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-      <div>
-        <% @banners.each do |banner| %>
-          <div class="carousel-item active">
+      <% @banners.each_with_index do |banner, index| %>
+          <div class="carousel-item <%= "active" if index.zero? %>">
             <%= image_tag "#{banner.preview.url}", class: "d-block w-100", style: "height: 500px;" %>
           </div>
         <% end %>
-      </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -35,15 +33,15 @@
           <div class="card d-flex justify-content-center alert alert-warning" style="width: 100%;">
             <h4 class="card-title">Promo: <%= offer.name %></h4>
             <div class="card-body ">
-              <button type="button" style="background: none; border: none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <button type="button" style="background: none; border: none" data-bs-toggle="modal" data-bs-target="#offerModal<%= offer.id %>">
                 <span aria-hidden="true"><%= image_tag offer.image.url, style: 'height:450px; width: 100%' if offer.image? %></span>
               </button>
 
-              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal fade" id="offerModal<%= offer.id %>" tabindex="-1" aria-labelledby="offerModalLabel<%= offer.id %>" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel"><%= offer.name %></h1>
+                      <h1 class="modal-title fs-5" id="offerModalLabel<%= offer.id %>"><%= offer.name %></h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">

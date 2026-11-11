@@ -1,17 +1,15 @@
-class AdminController < ApplicationController
-  before_action :authenticate_user!
-  before_action :require_admin!
+class AdminController < ActionController::Base
   before_action :set_locale
 
-  private
+  def set_locale
+    if params[:locale] && I18n.available_locales.include?(params[:locale].to_sym)
+      session[:locale] = params[:locale]
+    end
 
-  def require_admin!
-    head :forbidden unless current_user&.admin?
+    I18n.locale = session[:locale] || I18n.default_locale
   end
 
-  def set_locale
-    requested_locale = params[:locale]&.to_sym
-    session[:locale] = requested_locale if I18n.available_locales.include?(requested_locale)
-    I18n.locale = session[:locale] || I18n.default_locale
+  def after_sign_up_path_for(resource)
+    after_sign_in_path_for(resource) if is_navigational_format?
   end
 end

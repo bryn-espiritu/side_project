@@ -50,7 +50,7 @@ class Item < ApplicationRecord
   end
 
   def coin_return
-    bets.where(batch_count: batch_count).where.not(state: :cancelled).each {|bet| bet.cancel!}
+    bets.where(batch_count: batch_count, state: 'betting').find_each(&:cancel!)
   end
 
   def future?

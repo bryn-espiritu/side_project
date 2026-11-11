@@ -28,7 +28,7 @@ class Item < ApplicationRecord
     end
 
     event :end do
-      transitions from: :starting, to: :ended, guards: :enough_bets, after: :picked_winner
+      transitions from: :starting, to: :ended, guards: [:enough_bets, :winner_has_address?], after: :picked_winner
     end
 
     event :cancel, after: [:add_quantity, :coin_return] do
@@ -50,26 +50,36 @@ class Item < ApplicationRecord
   end
 
   def coin_return
-    bets.where(batch_count: batch_count).where.not(state: :cancelled).each {|bet| bet.cancel!}
+    bets.where(batch_count: batch_count, state: 'betting').find_each(&:cancel!)
   end
 
   def future?
     Time.now < offline_at
   end
 
+  def eligible_bets
+    bets.where(batch_count: batch_count, state: 'betting')
+  end
+
   def enough_bets
-    bets.where(batch_count: batch_count).count >= minimum_bets
+    minimum_bets.present? && minimum_bets.positive? && eligible_bets.count >= minimum_bets
+  end
+
+  # Do not draw until every participant can receive their prize.
+  def winner_has_address?
+    user_ids = eligible_bets.select(:user_id)
+    users_with_address = User.joins(:addresses).where(addresses: { is_default: true }).select(:id)
+    !User.where(id: user_ids).where.not(id: users_with_address).exists?
   end
 
   def picked_winner
-    bet_list = bets.where(batch_count: batch_count).where.not(state: :cancelled)
-    winner = bet_list.sample
+    winner = eligible_bets.to_a.sample
+    raise ActiveRecord::RecordNotFound, 'No eligible bets to draw' unless winner
+
+    address = winner.user.addresses.find_by!(is_default: true)
     winner.win!
-    bet_list.where.not(state: :won).update_all(state: :lost)
-    winner_list = Winner.new(item_batch_count: winner.batch_count, user: winner.user, item: winner.item, bet: winner, address: winner.user.addresses.find_by(is_default: true))
-    winner_list.save!
-
+    eligible_bets.update_all(state: 'lost')
+    Winner.create!(item_batch_count: winner.batch_count, user: winner.user,
+                   item: winner.item, bet: winner, address: address)
   end
-
 end
-

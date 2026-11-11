@@ -1,23 +1,24 @@
 class User::OrdersController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_event, only: [:cancel]
+  before_action :set_event, only: [:pay, :cancel]
 
   def index
-    @orders = current_user.orders.includes(:offer)
+    @orders = Order.includes(:user, :offer)
+
   end
 
   def cancel
-    if @order.may_cancel?
-      @order.cancel!
-      redirect_to user_user_profile_path, notice: "Successfully Cancelled!"
+    if @order.cancel!
+      flash[:notice] = "Successfully Cancelled!"
     else
-      redirect_to user_user_profile_path, alert: "This order cannot be cancelled."
+      flash[:alert] = @order.errors.full_messages.join(', ')
     end
+    redirect_to user_user_profile_path
   end
 
   private
 
   def set_event
-    @order = current_user.orders.find(params[:order_id] || params[:id])
+    @order = Order.find(params[:order_id])
   end
 end
+

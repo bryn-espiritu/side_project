@@ -4,7 +4,7 @@ class Order < ApplicationRecord
   after_create :generate_serial_number
 
   validates_presence_of :remarks, unless: :deposit?
-  validates_numericality_of :coin
+  validates :coin, numericality: { only_integer: true, greater_than: 0 }
   enum genre: { deposit: 0, increase: 1, deduct: 2, bonus: 3, share: 4 }
 
   include AASM
@@ -62,7 +62,7 @@ class Order < ApplicationRecord
   end
 
   def enough_coins?
-    user.coins => coin
+    user.coins >= coin
   end
 
   def not_deduct?

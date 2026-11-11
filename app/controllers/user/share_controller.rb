@@ -7,25 +7,27 @@ class User::ShareController < ApplicationController
     @banners = Banner.active
     @winners = Winner.includes(:item, :user).published
   end
-  
-  def edit;
-  end
 
-  def update;
-    if @winner.update(winner_params)
-      @winner.share!
-      redirect_to user_user_profile_path
-      flash[:notice] = "Shared Successfully!"
-    else
-      flash[:alert] = @winner.errors.full_messages.join(', ')
-      redirect_to user_user_profile_path
+  def edit; end
+
+  def update
+    unless @winner.may_share?
+      return redirect_to user_user_profile_path, alert: "This prize cannot be shared yet."
     end
+
+    Winner.transaction do
+      @winner.update!(winner_params)
+      @winner.share!
+    end
+    redirect_to user_user_profile_path, notice: "Shared Successfully!"
+  rescue ActiveRecord::RecordInvalid, AASM::InvalidTransition => e
+    redirect_to user_user_profile_path, alert: e.message
   end
 
   private
 
   def set_winner
-    @winner = Winner.find(params[:id] || params[:winner_id])
+    @winner = current_user.winners.find(params[:id] || params[:winner_id])
   end
 
   def winner_params

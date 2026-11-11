@@ -1,13 +1,15 @@
 class User::InvitesController < ApplicationController
-  before_action :authenticate_user!
+  require 'rqrcode'
 
   def index
-    @invite_link = invite_link
     @qrcode = qr_code_download
+    @invite_link = invite_link
   end
 
   def qr_code_download
-    RQRCode::QRCode.new(invite_link).as_svg(
+    qrcode = RQRCode::QRCode.new("client.com:3000/users/sign_up?promoter=#{current_user.email}")
+
+    svg = qrcode.as_svg(
       color: "000",
       shape_rendering: "crispEdges",
       module_size: 10,
@@ -17,6 +19,6 @@ class User::InvitesController < ApplicationController
   end
 
   def invite_link
-    "#{request.base_url}/users/sign_up?#{ { promoter: current_user.email }.to_query }"
+    "#{request.base_url}/users/sign_up?promoter=#{current_user.email}"
   end
 end

@@ -67,6 +67,7 @@ class Admin::ItemsController < AdminController
     else
       flash[:alert] = @item.errors.full_messages.join(', ')
     end
+    redirect_to admin_items_path
   end
 
   private

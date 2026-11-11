@@ -50,3 +50,8 @@
 /public/uploads/item/image/4/laptop.jpeg
 /public/uploads/item/image/5/pc.jpeg
 /public/uploads/item/image/6/pc.jpeg
+
+# Local Docker Compose secrets
+.env
+.env.*
+!.env.example

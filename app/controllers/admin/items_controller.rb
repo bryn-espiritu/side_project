@@ -62,12 +62,16 @@ class Admin::ItemsController < AdminController
   end
 
   def end
-    if @item.end!
-      flash[:notice] = "Successfully Ended"
+    if !@item.enough_bets
+      redirect_to admin_items_path, alert: "Cannot end lottery: minimum eligible entries not reached."
+    elsif !@item.winner_has_address?
+      redirect_to admin_items_path, alert: "Cannot end lottery: each participant needs a default shipping address."
     else
-      flash[:alert] = @item.errors.full_messages.join(', ')
+      @item.end!
+      redirect_to admin_items_path, notice: "Successfully ended lottery and selected a winner."
     end
-    redirect_to admin_items_path
+  rescue AASM::InvalidTransition, ActiveRecord::RecordInvalid, ActiveRecord::RecordNotFound => e
+    redirect_to admin_items_path, alert: "Unable to end lottery: #{'#{e.message}'}"
   end
 
   private

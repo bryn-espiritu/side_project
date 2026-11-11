@@ -1,8 +1,8 @@
 <div class="container">
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-      <% @banners.each do |banner| %>
-        <div class="carousel-item active">
+      <% @banners.each_with_index do |banner, index| %>
+        <div class="carousel-item <%= "active" if index.zero? %>">
           <%= image_tag "#{banner.preview.url}", class: "d-block w-100", style: "height: 500px;" %>
         </div>
       <% end %>

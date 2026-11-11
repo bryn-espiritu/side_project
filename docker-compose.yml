@@ -6,7 +6,7 @@ services:
     ports:
       - 3306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: qwer4321
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in your environment or .env}
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-authentication-plugin=mysql_native_password
     volumes:
       - ./tmp/db:/var/lib/mysql
@@ -28,6 +28,7 @@ services:
       - "1234:1234"
     environment:
       - REDIS_URL_CACHING=redis://redis:6379/0
+      - DB_PASSWORD=${DB_PASSWORD:?Set DB_PASSWORD in your environment or .env}
     depends_on:
       - db
       - redis
